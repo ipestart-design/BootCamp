@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootcamp Ideação | Inscrição</title>
+    <title>Bootcamp Ideação | 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0f172a;
             --accent: #6366f1;
             --bg: #ffffff;
-            --text: #1e293b;
         }
 
         body {
-            background: #ffffff;
-            font-family: 'Inter', sans-serif;
             margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: var(--text);
             overflow: hidden;
+            background-color: #fff;
         }
 
-        /* Fundo Animado Discreto (Mesh Gradient) */
-        .background-mesh {
+        /* O FUNDO IMPACTANTE E DISCRETO */
+        .aurora-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
-                        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
-                        radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%);
-            animation: meshMove 20s ease infinite alternate;
+            filter: blur(100px);
+            opacity: 0.6;
         }
 
-        @keyframes meshMove {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1) rotate(2deg); }
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
         }
 
+        .blob-1 { background: #e0e7ff; top: -10%; left: -10%; animation-duration: 25s; }
+        .blob-2 { background: #f5f3ff; bottom: -10%; right: -10%; animation-duration: 30s; animation-delay: -5s; }
+        .blob-3 { background: #ecfeff; top: 40%; left: 30%; animation-duration: 20s; animation-delay: -2s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) rotate(0deg) scale(1); }
+            to { transform: translate(100px, 100px) rotate(360deg) scale(1.2); }
+        }
+
+        /* ESTRUTURA DO FORMULÁRIO */
         .progress-wrap {
             position: fixed;
             top: 40px;
             width: 320px;
             height: 6px;
-            background: #f1f5f9;
+            background: rgba(15, 23, 42, 0.05);
             border-radius: 10px;
         }
 
@@ -67,8 +76,9 @@
         }
 
         .step-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px); /* Efeito Vidro */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px); /* Efeito Vidro Real */
+            -webkit-backdrop-filter: blur(20px);
             padding: 50px 40px;
             border-radius: 32px;
             position: absolute;
@@ -76,55 +86,56 @@
             box-sizing: border-box;
             display: none;
             flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        .step-card.active { display: flex; animation: slideIn 0.5s ease forwards; }
+        .step-card.active { display: flex; animation: slideUp 0.5s ease forwards; }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h2 { font-size: 26px; font-weight: 800; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.2; color: var(--primary); }
+        h2 { font-size: 26px; font-weight: 800; margin-bottom: 30px; letter-spacing: -1px; color: var(--primary); line-height: 1.2; }
 
         input {
             width: 100%;
             padding: 15px 0;
             border: none;
-            border-bottom: 2px solid #e2e8f0;
+            border-bottom: 2px solid rgba(15, 23, 42, 0.1);
             font-size: 20px;
             outline: none;
             transition: 0.3s;
             margin-bottom: 40px;
             background: transparent;
-            font-weight: 500;
         }
         input:focus { border-bottom-color: var(--accent); }
 
         .nav-buttons { display: flex; gap: 12px; margin-top: auto; }
 
-        .btn-next { background: var(--primary); color: white; border-radius: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; padding: 18px; flex: 2; }
-        .btn-next:hover { background: var(--accent); }
+        .btn-next { background: var(--primary); color: white; border-radius: 16px; font-weight: 600; cursor: pointer; border: none; padding: 18px; flex: 2; font-size: 16px; transition: 0.3s; }
+        .btn-next:hover { background: var(--accent); transform: translateY(-2px); }
         
-        .btn-back { background: transparent; color: #94a3b8; border-radius: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; border: 1px solid #e2e8f0; padding: 18px; flex: 1; }
-        .btn-back:hover { color: var(--accent); border-color: var(--accent); }
-
-        /* Estilos de Revisão */
-        .review-box { margin-bottom: 20px; }
-        .review-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
-        .rev-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
-        .rev-val { font-size: 14px; font-weight: 600; color: var(--primary); }
+        .btn-back { background: transparent; color: #64748b; border-radius: 16px; font-weight: 600; cursor: pointer; border: 1px solid rgba(15, 23, 42, 0.1); padding: 18px; flex: 1; transition: 0.3s; }
+        .btn-back:hover { background: white; color: var(--accent); border-color: var(--accent); }
 
         .options-grid { display: grid; gap: 10px; margin-bottom: 30px; }
-        .option-btn { padding: 14px; border: 2px solid #f1f5f9; border-radius: 14px; cursor: pointer; font-weight: 600; transition: 0.2s; text-align: center; }
+        .option-btn { padding: 14px; border: 2px solid rgba(15, 23, 42, 0.05); border-radius: 14px; cursor: pointer; font-weight: 600; transition: 0.2s; text-align: center; background: white; }
         .option-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+        .review-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .rev-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+        .rev-val { font-size: 14px; font-weight: 600; color: var(--primary); }
     </style>
 </head>
 <body>
 
-    <div class="background-mesh"></div>
+    <div class="aurora-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
     <div class="progress-wrap">
         <div class="progress-bar" id="bar"></div>
@@ -134,9 +145,7 @@
         <div class="step-card active" id="s1">
             <h2>Vamos começar.<br>Qual seu nome completo?</h2>
             <input type="text" id="nome" placeholder="Nome Sobrenome" onkeyup="checkEnter(event, 1)">
-            <div class="nav-buttons">
-                <button class="btn-next" onclick="next(1)">Próximo</button>
-            </div>
+            <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s2">
@@ -181,17 +190,17 @@
 
         <div class="step-card" id="s6">
             <h2>Revise seus dados</h2>
-            <div class="review-box" id="review-content"></div>
-            <div class="nav-buttons">
+            <div id="review-content"></div>
+            <div class="nav-buttons" style="margin-top: 30px;">
                 <button class="btn-back" onclick="back(6)">Corrigir</button>
-                <button class="btn-next" onclick="finish()" style="background: var(--accent);">Confirmar</button>
+                <button class="btn-next" onclick="finish()" style="background: var(--accent);">Confirmar Inscrição</button>
             </div>
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
             <div style="font-size: 50px; margin-bottom: 20px;">✨</div>
-            <h2>Pronto!</h2>
-            <p style="color: #64748b;">Inscrição enviada com sucesso. Verifique seu e-mail.</p>
+            <h2>Tudo pronto!</h2>
+            <p style="color: #64748b;">Inscrição confirmada. <br>Olhe sua caixa de entrada.</p>
         </div>
     </div>
 
@@ -252,12 +261,10 @@
             const data = [
                 {l: 'Nome', v: document.getElementById('nome').value},
                 {l: 'E-mail', v: document.getElementById('email').value},
-                {l: 'CPF', v: document.getElementById('cpf').value},
+                {l: 'Telefone', v: document.getElementById('tel').value},
                 {l: 'Perfil', v: selectedRole}
             ];
-            content.innerHTML = data.map(item => `
-                <div class="review-item"><span class="rev-label">${item.l}</span><span class="rev-val">${item.v}</span></div>
-            `).join('');
+            content.innerHTML = data.map(i => `<div class="review-item"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
         }
 
         function finish() {
