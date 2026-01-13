@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição | Bootcamp de Ideação</title>
+    <title>Bootcamp Ideação | Inscrição</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,6 +11,7 @@
             --accent: #6366f1;
             --bg: #ffffff;
             --text: #1e293b;
+            --soft-bg: #f8fafc;
         }
 
         body {
@@ -25,18 +26,23 @@
             overflow: hidden;
         }
 
+        /* Elementos Visuais Abstratos (BG) */
+        .shape { position: absolute; z-index: -1; filter: blur(80px); opacity: 0.4; }
+        .shape-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: var(--accent); border-radius: 50%; }
+        .shape-2 { bottom: -10%; right: -10%; width: 300px; height: 300px; background: #a855f7; border-radius: 50%; }
+
         .progress-wrap {
             position: fixed;
             top: 40px;
-            width: 300px;
-            height: 4px;
+            width: 320px;
+            height: 6px;
             background: #f1f5f9;
             border-radius: 10px;
         }
 
         .progress-bar {
             height: 100%;
-            width: 20%;
+            width: 14.2%; /* Dividido por 7 telas agora */
             background: var(--accent);
             border-radius: 10px;
             transition: 0.8s cubic-bezier(0.65, 0, 0.35, 1);
@@ -45,82 +51,91 @@
         .card-stack {
             position: relative;
             width: 100%;
-            max-width: 450px;
-            height: 450px;
+            max-width: 480px;
+            height: 520px;
         }
 
         .step-card {
             background: #ffffff;
-            padding: 40px;
+            padding: 50px 40px;
             border-radius: 32px;
             position: absolute;
             width: 100%;
             box-sizing: border-box;
             display: none;
             flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
             border: 1px solid #f1f5f9;
         }
 
-        .step-card.active { display: flex; animation: slideUp 0.6s forwards; }
+        .step-card.active { display: flex; animation: slideIn 0.5s ease forwards; }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        h2 { font-size: 24px; font-weight: 800; margin-bottom: 25px; letter-spacing: -1px; }
+        h2 { font-size: 26px; font-weight: 800; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.2; }
 
         input {
             width: 100%;
             padding: 15px 0;
             border: none;
             border-bottom: 2px solid #e2e8f0;
-            font-size: 18px;
+            font-size: 20px;
             outline: none;
             transition: 0.3s;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             background: transparent;
+            font-weight: 500;
         }
 
         input:focus { border-bottom-color: var(--accent); }
 
-        /* Estilo para a Seleção de Perfil */
-        .options-grid {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
+        .nav-buttons { display: flex; gap: 12px; margin-top: auto; }
 
-        .option-btn {
-            padding: 15px;
-            border: 2px solid #f1f5f9;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .option-btn:hover { border-color: var(--accent); background: #f5f3ff; }
-        .option-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
-
-        .btn-next {
-            background: var(--primary);
-            color: white;
-            border: none;
+        .btn-next, .btn-back {
             padding: 18px;
             border-radius: 16px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
+            border: none;
         }
 
-        .btn-next:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-next { background: var(--primary); color: white; flex: 2; }
+        .btn-next:hover { background: var(--accent); }
+        .btn-back { background: #f1f5f9; color: #64748b; flex: 1; }
+        .btn-back:hover { background: #e2e8f0; }
+
+        /* Revisão de Dados */
+        .review-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+        .review-label { color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 11px; }
+        .review-value { color: var(--primary); font-weight: 600; }
+
+        .options-grid { display: grid; gap: 10px; margin-bottom: 30px; }
+        .option-btn {
+            padding: 14px;
+            border: 2px solid #f1f5f9;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .option-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
     </style>
 </head>
 <body>
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
 
     <div class="progress-wrap">
         <div class="progress-bar" id="bar"></div>
@@ -128,52 +143,77 @@
 
     <div class="card-stack">
         <div class="step-card active" id="s1">
-            <h2>Qual seu <br>nome completo?</h2>
-            <input type="text" id="nome" placeholder="Digite aqui...">
-            <button class="btn-next" onclick="next(1)">Próximo</button>
+            <h2>Vamos começar.<br>Qual seu nome completo?</h2>
+            <input type="text" id="nome" placeholder="Nome Sobrenome" onkeyup="checkEnter(event, 1)">
+            <div class="nav-buttons">
+                <button class="btn-next" onclick="next(1)">Próximo</button>
+            </div>
         </div>
 
         <div class="step-card" id="s2">
-            <h2>Seu melhor <br>e-mail?</h2>
-            <input type="email" id="email" placeholder="exemplo@email.com">
-            <button class="btn-next" onclick="next(2)">Próximo</button>
+            <h2>Seu melhor e-mail?</h2>
+            <input type="email" id="email" placeholder="email@provedor.com" onkeyup="checkEnter(event, 2)">
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="back(2)">Voltar</button>
+                <button class="btn-next" onclick="next(2)">Próximo</button>
+            </div>
         </div>
 
         <div class="step-card" id="s3">
             <h2>Seu WhatsApp?</h2>
-            <input type="tel" id="tel" placeholder="(00) 00000-0000" maxlength="15">
-            <button class="btn-next" onclick="next(3)">Próximo</button>
+            <input type="tel" id="tel" placeholder="(00) 00000-0000" maxlength="15" onkeyup="checkEnter(event, 3)">
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="back(3)">Voltar</button>
+                <button class="btn-next" onclick="next(3)">Próximo</button>
+            </div>
         </div>
 
         <div class="step-card" id="s4">
             <h2>Informe seu CPF</h2>
-            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14">
-            <button class="btn-next" onclick="next(4)">Próximo</button>
+            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" onkeyup="checkEnter(event, 4)">
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="back(4)">Voltar</button>
+                <button class="btn-next" onclick="next(4)">Próximo</button>
+            </div>
         </div>
 
         <div class="step-card" id="s5">
-            <h2>Qual seu perfil?</h2>
+            <h2>Qual seu perfil atual?</h2>
             <div class="options-grid">
                 <div class="option-btn" onclick="selectProfile(this, 'Aluno')">Aluno</div>
                 <div class="option-btn" onclick="selectProfile(this, 'Professor')">Professor</div>
                 <div class="option-btn" onclick="selectProfile(this, 'Empreendedor')">Empreendedor</div>
-                <div class="option-btn" onclick="selectProfile(this, 'Outro')">Outro</div>
             </div>
-            <input type="hidden" id="perfil">
-            <button class="btn-next" onclick="finish()">Finalizar Inscrição</button>
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="back(5)">Voltar</button>
+                <button class="btn-next" onclick="next(5)">Revisar Dados</button>
+            </div>
         </div>
 
-        <div class="step-card" id="sFinal" style="text-align: center;">
-            <div style="font-size: 50px; margin-bottom: 20px;">✨</div>
-            <h2>Inscrição Confirmada!</h2>
-            <p style="color: #64748b;">Enviamos um e-mail com os detalhes.</p>
+        <div class="step-card" id="s6">
+            <h2>Confirme seus dados</h2>
+            <div id="review-content" style="margin-bottom: 30px;">
+                </div>
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="back(6)">Corrigir</button>
+                <button class="btn-next" onclick="finish()" style="background: var(--accent);">Confirmar Inscrição</button>
+            </div>
+        </div>
+
+        <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" style="margin: 0 auto 20px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <h2>Inscrição Realizada!</h2>
+            <p style="color: #64748b;">Enviamos um e-mail de confirmação para você.</p>
         </div>
     </div>
 
     <script>
         let selectedRole = "";
+        const totalSteps = 6;
 
-        // Máscaras de input
+        // Máscaras
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
@@ -181,40 +221,72 @@
 
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, '');
-            v = v.replace(/(\d{3})(\d)/, "$1.$2");
-            v = v.replace(/(\d{3})(\d)/, "$1.$2");
-            v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
             e.target.value = v;
         });
+
+        function checkEnter(e, step) {
+            if(e.key === "Enter") next(step);
+        }
 
         function selectProfile(btn, role) {
             document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             selectedRole = role;
-            document.getElementById('perfil').value = role;
         }
 
         function next(step) {
             const inputs = ['nome', 'email', 'tel', 'cpf'];
             if(step <= 4) {
                 const val = document.getElementById(inputs[step-1]).value;
-                if(val.length < 3) return alert("Preencha o campo corretamente.");
+                if(val.length < 3) return;
             }
+            if(step === 5 && !selectedRole) return alert("Selecione um perfil.");
 
-            document.getElementById('s' + step).style.display = 'none';
-            const nextStep = document.getElementById('s' + (step + 1));
-            nextStep.style.display = 'flex';
-            nextStep.classList.add('active');
-            
-            document.getElementById('bar').style.width = (step + 1) * 20 + '%';
+            if(step === 5) renderReview();
+
+            document.getElementById('s' + step).classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('s' + step).style.display = 'none';
+                const nextStep = document.getElementById('s' + (step + 1));
+                nextStep.style.display = 'flex';
+                nextStep.classList.add('active');
+                document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%';
+            }, 50);
+        }
+
+        function back(step) {
+            document.getElementById('s' + step).classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('s' + step).style.display = 'none';
+                const prevStep = document.getElementById('s' + (step - 1));
+                prevStep.style.display = 'flex';
+                prevStep.classList.add('active');
+                document.getElementById('bar').style.width = ((step - 1) / totalSteps) * 100 + '%';
+            }, 50);
+        }
+
+        function renderReview() {
+            const content = document.getElementById('review-content');
+            const fields = [
+                {l: 'Nome', v: document.getElementById('nome').value},
+                {l: 'E-mail', v: document.getElementById('email').value},
+                {l: 'Telefone', v: document.getElementById('tel').value},
+                {l: 'CPF', v: document.getElementById('cpf').value},
+                {l: 'Perfil', v: selectedRole}
+            ];
+            content.innerHTML = fields.map(f => `
+                <div class="review-item">
+                    <span class="review-label">${f.l}</span>
+                    <span class="review-value">${f.v}</span>
+                </div>
+            `).join('');
         }
 
         function finish() {
-            if(!selectedRole) return alert("Selecione seu perfil.");
-            
-            // Aqui você enviaria para o SheetDB/EmailJS
-            document.getElementById('s5').style.display = 'none';
+            document.getElementById('s6').style.display = 'none';
             document.getElementById('sFinal').style.display = 'flex';
+            document.getElementById('sFinal').classList.add('active');
             document.getElementById('bar').style.width = '100%';
         }
     </script>
