@@ -188,11 +188,13 @@
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
+        // Máscara de Telefone
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
+        // Máscara de CPF
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, '');
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
@@ -254,7 +256,7 @@
             const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const aF = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
 
-            // PAYLOAD SINCRONIZADO COM O CABEÇALHO DA PLANILHA
+            // Payload sincronizado com o cabeçalho que você colou na planilha
             const payload = {
                 "NOME COMPLETO": document.getElementById('nome').value,
                 "E-MAIL": document.getElementById('email').value,
@@ -268,11 +270,14 @@
             };
 
             try {
-                await fetch('https://sheetdb.io/api/v1/1v92fwgtl98vd', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                // Envio para a nova URL do SheetDB
+                await fetch('https://sheetdb.io/api/v1/ip3jj7bkpknn3', {
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ data: [payload] })
                 });
 
+                // Envio do e-mail via EmailJS
                 await emailjs.send("service_clqnr6o", "template_13fmvbj", {
                     nome: payload["NOME COMPLETO"],
                     email: payload["E-MAIL"],
@@ -285,7 +290,7 @@
                 document.getElementById('bar').style.width = '100%';
 
             } catch (e) { 
-                alert("Erro ao enviar. Verifique a planilha."); 
+                alert("Erro ao enviar. Verifique sua conexão."); 
                 btn.disabled = false; btn.innerText = "Confirmar";
             }
         }
