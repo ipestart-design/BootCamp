@@ -24,7 +24,10 @@
         .blob-3 { background: var(--verde); top: 30%; left: 20%; }
         @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(150px, 100px) scale(1.2); } }
         .header-container { position: fixed; top: 20px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; z-index: 10; }
-        .logo-img { width: 80px; height: auto; }
+        
+        /* AJUSTE DA LOGO */
+        .logo-img { width: 100px; height: auto; }
+        
         .progress-wrap { width: 320px; height: 6px; background: rgba(0, 0, 0, 0.05); border-radius: 20px; overflow: hidden; }
         .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); border-radius: 20px; transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
         .card-stack { position: relative; width: 100%; max-width: 460px; height: 520px; margin-top: 80px; }
@@ -50,7 +53,7 @@
     <div class="aurora-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 
     <div class="header-container">
-        <img src="logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+        <img src="Frame 26.png" alt="Logo Bootcamp" class="logo-img" onerror="this.style.display='none'">
         <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     </div>
 
@@ -122,7 +125,7 @@
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
             <div style="color: var(--roxo); font-size: 50px; margin-bottom: 10px;">●</div>
             <h2>Inscrição Realizada!</h2>
-            <p style="color: #64748b;">Verifique sua caixa de e-mail.</p>
+            <p style="color: #64748b;">Sucesso! Confira seu e-mail.</p>
         </div>
     </div>
 
@@ -190,7 +193,7 @@
                 {l: 'CPF', v: document.getElementById('cpf').value},
                 {l: 'Perfil', v: pF},
                 {l: 'Camisa', v: cF},
-                {l: 'Acessibilidade', v: aF}
+                {l: 'Acesso', v: aF}
             ];
             document.getElementById('review-content').innerHTML = data.map(i => `<div class="rev-row"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
         }
