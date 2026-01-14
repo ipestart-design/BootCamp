@@ -15,101 +15,34 @@
     </script>
 
     <style>
-        :root { 
-            --amarelo: #F2C94C; --roxo: #6C4BFF; --verde: #6BCF9D; 
-            --preto: #000000; --branco: #FFFFFF; 
-        }
-        
-        body { 
-            margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; 
-            overflow: hidden; background-color: var(--branco); 
-        }
-
+        :root { --amarelo: #F2C94C; --roxo: #6C4BFF; --verde: #6BCF9D; --preto: #000000; --branco: #FFFFFF; }
+        body { margin: 0; padding: 0; font-family: 'Manrope', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; background-color: var(--branco); }
         .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(80px); opacity: 0.4; }
         .blob { position: absolute; width: 600px; height: 600px; border-radius: 50%; animation: move 25s infinite alternate; }
         .blob-1 { background: var(--roxo); top: -10%; left: -10%; }
         .blob-2 { background: var(--amarelo); bottom: -10%; right: -10%; }
         .blob-3 { background: var(--verde); top: 30%; left: 20%; }
         @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(150px, 100px) scale(1.2); } }
-
-        /* HEADER: LOGO + PROGRESSO */
-        .header-container {
-            position: fixed;
-            top: 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            z-index: 10;
-        }
-
+        .header-container { position: fixed; top: 20px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; z-index: 10; }
         .logo-img { width: 80px; height: auto; }
-
-        .progress-wrap { 
-            width: 320px; 
-            height: 6px; 
-            background: rgba(0, 0, 0, 0.05); 
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .progress-bar { 
-            height: 100%; 
-            width: 12.5%; 
-            background: var(--roxo); 
-            border-radius: 20px; 
-            transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1); 
-        }
-
-        /* CARD DE CONTEÚDO */
-        .card-stack { 
-            position: relative; 
-            width: 100%; 
-            max-width: 460px; 
-            height: 520px; 
-            margin-top: 80px; /* Espaço para não bater na barra */
-        }
-
-        .step-card { 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px);
-            padding: 40px; 
-            border-radius: 28px; 
-            position: absolute; 
-            width: 100%; 
-            box-sizing: border-box; 
-            display: none; 
-            flex-direction: column; 
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.08); 
-            border: 1px solid rgba(255,255,255,1); 
-        }
-        
+        .progress-wrap { width: 320px; height: 6px; background: rgba(0, 0, 0, 0.05); border-radius: 20px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); border-radius: 20px; transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
+        .card-stack { position: relative; width: 100%; max-width: 460px; height: 520px; margin-top: 80px; }
+        .step-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 40px; border-radius: 28px; position: absolute; width: 100%; box-sizing: border-box; display: none; flex-direction: column; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,1); }
         .step-card.active { display: flex; animation: slideUp 0.6s ease forwards; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         h2 { font-size: 24px; font-weight: 800; margin-bottom: 25px; color: var(--preto); letter-spacing: -1px; line-height: 1.2; }
-        
-        input { 
-            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #f1f5f9; 
-            font-size: 18px; font-family: 'Manrope', sans-serif; outline: none; 
-            transition: 0.3s; margin-bottom: 25px; background: transparent; 
-        }
+        input { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #f1f5f9; font-size: 18px; font-family: 'Manrope', sans-serif; outline: none; transition: 0.3s; margin-bottom: 25px; background: transparent; }
         input:focus { border-bottom-color: var(--roxo); }
-
         .nav-buttons { display: flex; gap: 12px; margin-top: auto; }
         .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; flex: 2; transition: 0.3s; }
         .btn-next:hover { background: var(--roxo); }
         .btn-back { background: transparent; color: #94a3b8; border: 1px solid #f1f5f9; border-radius: 14px; font-weight: 700; cursor: pointer; flex: 1; }
-
         .option-btn { padding: 12px; border: 2px solid #f8fafc; border-radius: 14px; cursor: pointer; font-weight: 700; background: var(--branco); margin-bottom: 8px; text-align: center; font-size: 14px; }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
-
         .rev-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
         .rev-label { font-weight: 800; color: #cbd5e1; text-transform: uppercase; font-size: 10px; }
-        .rev-val { font-weight: 700; color: var(--preto); }
+        .rev-val { font-weight: 700; color: var(--preto); text-align: right; }
     </style>
 </head>
 <body>
@@ -118,9 +51,7 @@
 
     <div class="header-container">
         <img src="logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-        <div class="progress-wrap">
-            <div class="progress-bar" id="bar"></div>
-        </div>
+        <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     </div>
 
     <div class="card-stack">
@@ -151,9 +82,9 @@
         <div class="step-card" id="s5">
             <h2>Qual seu perfil?</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Aluno', 'perfil')">Aluno</div>
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Professor', 'perfil')">Professor</div>
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Empreendedor', 'perfil')">Empreendedor</div>
+                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
+                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
+                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
             <input type="text" id="perfil_outro" placeholder="Especifique..." style="display:none; margin-top: 10px;">
@@ -190,8 +121,8 @@
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
             <div style="color: var(--roxo); font-size: 50px; margin-bottom: 10px;">●</div>
-            <h2>Pronto!</h2>
-            <p style="color: #64748b;">Verifique seu e-mail.</p>
+            <h2>Inscrição Realizada!</h2>
+            <p style="color: #64748b;">Verifique sua caixa de e-mail.</p>
         </div>
     </div>
 
@@ -233,8 +164,7 @@
                 document.getElementById('s' + step).style.display = 'none';
                 const n = document.getElementById('s' + (step + 1));
                 if(n) {
-                    n.style.display = 'flex'; 
-                    n.classList.add('active');
+                    n.style.display = 'flex'; n.classList.add('active');
                     document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%';
                 }
             }, 50);
@@ -260,27 +190,29 @@
                 {l: 'CPF', v: document.getElementById('cpf').value},
                 {l: 'Perfil', v: pF},
                 {l: 'Camisa', v: cF},
-                {l: 'Acesso', v: aF}
+                {l: 'Acessibilidade', v: aF}
             ];
             document.getElementById('review-content').innerHTML = data.map(i => `<div class="rev-row"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
         }
 
         async function finish() {
             const btn = document.getElementById('confirm-btn');
-            btn.innerText = "Processando..."; btn.disabled = true;
+            btn.innerText = "Enviando..."; btn.disabled = true;
 
             const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
             const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const aF = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
 
             const payload = {
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                tel: document.getElementById('tel').value,
-                cpf: document.getElementById('cpf').value,
-                perfil: pF,
-                tamanho_camisa: cF,
-                acessibilidade: aF
+                "NOME COMPLETO": document.getElementById('nome').value,
+                "E-MAIL": document.getElementById('email').value,
+                "TELEFONE (WHATSAPP) ": document.getElementById('tel').value,
+                "CPF": document.getElementById('cpf').value,
+                "ALUNO": (pF === 'ALUNO' ? 'X' : ''),
+                "PROFESSOR": (pF === 'PROFESSOR' ? 'X' : ''),
+                "EMPREENDEDOR": (pF === 'EMPREENDEDOR' ? 'X' : ''),
+                "TAMANHO CAMISA (T-Shirt normal sem ser baby look)": cF,
+                "ACESSIBILIDADE": aF 
             };
 
             try {
@@ -290,18 +222,17 @@
                 });
 
                 await emailjs.send("service_clqnr6o", "template_13fmvbj", {
-                    nome: payload.nome,
-                    email: payload.email,
-                    perfil: payload.perfil
+                    nome: payload["NOME COMPLETO"],
+                    email: payload["E-MAIL"],
+                    perfil: pF
                 });
 
                 document.getElementById('s8').style.display = 'none';
                 document.getElementById('sFinal').style.display = 'flex';
-                document.getElementById('sFinal').classList.add('active');
                 document.getElementById('bar').style.width = '100%';
 
             } catch (e) { 
-                alert("Erro ao finalizar."); 
+                alert("Erro ao enviar. Tente novamente."); 
                 btn.disabled = false; btn.innerText = "Confirmar Inscrição";
             }
         }
