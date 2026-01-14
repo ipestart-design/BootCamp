@@ -6,142 +6,43 @@
     <title>Bootcamp Ideação | 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --amarelo: #F2C94C;
-            --roxo: #6C4BFF;
-            --verde: #6BCF9D;
-            --preto: #000000;
-            --branco: #FFFFFF;
-        }
+        :root { --amarelo: #F2C94C; --roxo: #6C4BFF; --verde: #6BCF9D; --preto: #000000; --branco: #FFFFFF; }
+        body { margin: 0; padding: 0; font-family: 'Manrope', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: var(--branco); }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Manrope', sans-serif; /* Tipografia Manrope */
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-color: var(--branco);
-        }
-
-        /* FUNDO AURORA COM CORES DA IDENTIDADE */
-        .aurora-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.4;
-        }
-
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            animation: move 25s infinite alternate;
-        }
-
+        .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(80px); opacity: 0.4; }
+        .blob { position: absolute; width: 600px; height: 600px; border-radius: 50%; animation: move 25s infinite alternate; }
         .blob-1 { background: var(--roxo); top: -10%; left: -10%; }
-        .blob-2 { background: var(--amarelo); bottom: -10%; right: -10%; animation-delay: -5s; }
-        .blob-3 { background: var(--verde); top: 30%; left: 20%; animation-delay: -10s; }
+        .blob-2 { background: var(--amarelo); bottom: -10%; right: -10%; }
+        .blob-3 { background: var(--verde); top: 30%; left: 20%; }
+        @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(150px, 100px) scale(1.2); } }
 
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(150px, 100px) scale(1.2); }
-        }
+        /* ESPAÇO PARA O LOGO */
+        .logo-container { position: fixed; top: 40px; text-align: center; width: 100%; }
+        .logo-placeholder { width: 120px; height: auto; margin-bottom: 20px; }
 
-        .progress-wrap {
-            position: fixed;
-            top: 40px;
-            width: 320px;
-            height: 8px;
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
+        .progress-wrap { position: fixed; top: 120px; width: 320px; height: 8px; background: #f1f5f9; border-radius: 10px; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); border-radius: 10px; transition: 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
 
-        .progress-bar {
-            height: 100%;
-            width: 12.5%;
-            background: var(--roxo); /* Cor Roxo: Visão */
-            border-radius: 10px;
-            transition: 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-        }
-
-        .card-stack {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-            height: 550px;
-        }
-
-        .step-card {
-            background: var(--branco);
-            padding: 45px;
-            border-radius: 24px;
-            position: absolute;
-            width: 100%;
-            box-sizing: border-box;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15);
-            border: 1px solid #f1f5f9;
-        }
-
+        .card-stack { position: relative; width: 100%; max-width: 480px; height: 580px; }
+        .step-card { background: var(--branco); padding: 45px; border-radius: 24px; position: absolute; width: 100%; box-sizing: border-box; display: none; flex-direction: column; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15); border: 1px solid #f1f5f9; }
         .step-card.active { display: flex; animation: slideUp 0.5s ease forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { 
-            font-size: 28px; 
-            font-weight: 800; /* SemiBold/Bold conforme guia */
-            margin-bottom: 30px; 
-            color: var(--preto); /* Preto: Estrutura */
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px 0;
-            border: none;
-            border-bottom: 2px solid #e2e8f0;
-            font-size: 18px;
-            font-family: 'Manrope', sans-serif;
-            outline: none;
-            transition: 0.3s;
-            margin-bottom: 30px;
-            background: transparent;
-        }
+        h2 { font-size: 26px; font-weight: 800; margin-bottom: 25px; color: var(--preto); letter-spacing: -1px; line-height: 1.1; }
+        input { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #e2e8f0; font-size: 18px; font-family: 'Manrope', sans-serif; outline: none; transition: 0.3s; margin-bottom: 20px; background: transparent; }
         input:focus { border-bottom-color: var(--roxo); }
 
-        .nav-buttons { display: flex; gap: 15px; margin-top: auto; }
+        .nav-buttons { display: flex; gap: 15px; margin-top: auto; padding-top: 10px; }
+        .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 18px; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 2; transition: 0.3s; }
+        .btn-next:hover { background: var(--roxo); }
+        .btn-back { background: var(--branco); color: #94a3b8; border: 1px solid #e2e8f0; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 1; }
 
-        .btn-next { 
-            background: var(--preto); 
-            color: var(--branco); 
-            border: none; padding: 18px; border-radius: 12px;
-            font-size: 16px; font-weight: 600; cursor: pointer; flex: 2;
-            transition: 0.3s;
-        }
-        .btn-next:hover { background: var(--roxo); transform: translateY(-2px); }
-        
-        .btn-back { 
-            background: var(--branco); 
-            color: #94a3b8; border: 1px solid #e2e8f0;
-            padding: 18px; border-radius: 12px; font-weight: 600;
-            cursor: pointer; flex: 1; transition: 0.3s;
-        }
-        .btn-back:hover { color: var(--preto); border-color: var(--preto); }
-
-        .option-btn { 
-            padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px;
-            cursor: pointer; font-weight: 600; background: var(--branco);
-            margin-bottom: 10px; transition: 0.2s; text-align: center;
-        }
+        .option-btn { padding: 12px; border: 2px solid #f1f5f9; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--branco); margin-bottom: 8px; text-align: center; font-size: 14px; }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
 
-        .rev-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
-        .rev-val { font-size: 14px; font-weight: 600; color: var(--preto); }
+        .rev-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+        .rev-label { font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+        .rev-val { font-weight: 600; color: var(--preto); text-align: right; }
     </style>
 </head>
 <body>
@@ -152,18 +53,22 @@
         <div class="blob blob-3"></div>
     </div>
 
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo Bootcamp" class="logo-placeholder" onerror="this.style.display='none'">
+    </div>
+
     <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
 
     <div class="card-stack">
         <div class="step-card active" id="s1">
             <h2>Qual seu nome completo?</h2>
-            <input type="text" id="nome" placeholder="Digite aqui..." onkeyup="checkEnter(event, 1)">
+            <input type="text" id="nome" placeholder="Seu nome" onkeyup="checkEnter(event, 1)">
             <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s2">
             <h2>Seu melhor e-mail?</h2>
-            <input type="email" id="email" placeholder="exemplo@email.com" onkeyup="checkEnter(event, 2)">
+            <input type="email" id="email" placeholder="email@provedor.com" onkeyup="checkEnter(event, 2)">
             <div class="nav-buttons"><button class="btn-back" onclick="back(2)">Voltar</button><button class="btn-next" onclick="next(2)">Próximo</button></div>
         </div>
 
@@ -181,30 +86,31 @@
 
         <div class="step-card" id="s5">
             <h2>Qual seu perfil?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Aluno', 'perfil')">Aluno</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Professor', 'perfil')">Professor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Empreendedor', 'perfil')">Empreendedor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none; margin-top: 10px;">
+            <input type="text" id="perfil_outro" placeholder="Qual seu perfil?" style="display:none; margin-top: 10px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s6">
             <h2>Tamanho da Camisa</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'P', 'camisa')">P</div>
                 <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'M', 'camisa')">M</div>
                 <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'G', 'camisa')">G</div>
-                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'GG', 'camisa')">GG</div>
+                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'Outros', 'camisa')">Outros</div>
             </div>
+            <input type="text" id="camisa_outro" placeholder="Qual tamanho?" style="display:none; margin-top: 10px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s7">
             <h2>Necessita de acessibilidade?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
             </div>
@@ -214,14 +120,14 @@
 
         <div class="step-card" id="s8">
             <h2>Revise seus dados</h2>
-            <div id="review-content" style="margin-bottom: 20px;"></div>
+            <div id="review-content" style="margin-bottom: 15px; overflow-y: auto; max-height: 250px;"></div>
             <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Corrigir</button><button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button></div>
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
-            <div style="color: var(--verde); font-size: 60px; margin-bottom: 20px;">●</div>
-            <h2 style="margin-bottom: 10px;">Inscrição Realizada!</h2>
-            <p style="color: #64748b; margin: 0;">O florescimento da sua ideia começa agora.</p>
+            <div style="color: var(--roxo); font-size: 50px;">●</div>
+            <h2>Pronto!</h2>
+            <p style="color: #64748b;">Verifique seu e-mail.</p>
         </div>
     </div>
 
@@ -233,7 +139,9 @@
             document.querySelectorAll('.'+group).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             form[field] = val;
+            
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
+            if(field === 'camisa') document.getElementById('camisa_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
@@ -277,30 +185,34 @@
 
         function renderReview() {
             const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
+            const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const aF = form.acesso === 'Sim' ? 'Sim: ' + document.getElementById('acesso_detalhe').value : 'Não';
+            
             const data = [
                 {l: 'Nome', v: document.getElementById('nome').value},
                 {l: 'E-mail', v: document.getElementById('email').value},
                 {l: 'CPF', v: document.getElementById('cpf').value},
                 {l: 'Perfil', v: pF},
-                {l: 'Camisa', v: form.camisa},
+                {l: 'Camisa', v: cF},
                 {l: 'Acessibilidade', v: aF}
             ];
-            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f1f5f9;"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
+            document.getElementById('review-content').innerHTML = data.map(i => `<div class="rev-row"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
         }
 
         async function finish() {
             const btn = document.getElementById('confirm-btn');
             btn.innerText = "Processando..."; btn.disabled = true;
+            
             const payload = {
                 nome: document.getElementById('nome').value,
                 email: document.getElementById('email').value,
                 tel: document.getElementById('tel').value,
                 cpf: document.getElementById('cpf').value,
                 perfil: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil,
-                tamanho_camisa: form.camisa,
+                tamanho_camisa: form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa,
                 acessibilidade: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Nenhuma'
             };
+
             try {
                 await fetch('https://sheetdb.io/api/v1/1v92fwgtl98vd', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
