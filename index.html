@@ -33,80 +33,61 @@
         .blob-2 { background: var(--amarelo); bottom: -10%; right: -10%; }
         @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(100px, 50px) scale(1.1); } }
 
-        /* HEADER INTEGRADO AO FLUXO */
         .main-header {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 0 20px 0; /* Espaço no topo */
-            gap: 20px;
+            padding: 30px 0 15px 0;
+            gap: 15px;
         }
         
-        .logo-img { 
-            width: 200px; /* Logo maior e clara conforme guia */
-            height: auto; 
-        }
+        .logo-img { width: 180px; height: auto; }
         
-        .progress-wrap { 
-            width: 280px; height: 6px; background: rgba(0, 0, 0, 0.05); 
-            border-radius: 20px; overflow: hidden; 
-        }
-        .progress-bar { 
-            height: 100%; width: 12.5%; background: var(--roxo); 
-            transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1); 
-        }
+        .progress-wrap { width: 260px; height: 6px; background: rgba(0, 0, 0, 0.05); border-radius: 20px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
 
-        /* CARD AGORA SEGUE O FLUXO ABAIXO DA LOGO */
         .container {
             width: 100%;
-            max-width: 460px;
+            max-width: 440px;
             padding: 0 20px 40px 20px;
             box-sizing: border-box;
-            perspective: 1000px;
         }
 
         .step-card { 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(20px); 
-            padding: 40px; 
-            border-radius: 32px; 
+            padding: 35px; 
+            border-radius: 28px; 
             display: none; 
             flex-direction: column; 
-            min-height: 480px;
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.08); 
+            box-shadow: 0 25px 50px -15px rgba(0,0,0,0.08); 
             border: 1px solid rgba(255,255,255,1); 
-            animation: slideUp 0.6s ease forwards;
+            animation: slideUp 0.5s ease forwards;
         }
 
         .step-card.active { display: flex; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        /* Tipografia SemiBold para Títulos conforme manual */
-        h2 { font-size: 24px; font-weight: 600; margin-bottom: 25px; color: var(--preto); letter-spacing: -1px; line-height: 1.2; }
+        h2 { font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--preto); letter-spacing: -0.5px; line-height: 1.2; }
         
-        /* Tipografia Regular para Inputs conforme manual */
         input { 
-            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #f1f5f9; 
-            font-size: 18px; font-family: 'Manrope', sans-serif; font-weight: 400;
-            outline: none; transition: 0.3s; margin-bottom: 25px; background: transparent; 
+            width: 100%; padding: 10px 0; border: none; border-bottom: 2px solid #f1f5f9; 
+            font-size: 17px; font-family: 'Manrope', sans-serif; font-weight: 400;
+            outline: none; transition: 0.3s; margin-bottom: 20px; background: transparent; 
         }
         input:focus { border-bottom-color: var(--roxo); }
 
-        .nav-buttons { display: flex; gap: 12px; margin-top: auto; padding-top: 20px; }
-        .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 16px; border-radius: 14px; font-weight: 600; cursor: pointer; flex: 2; transition: 0.3s; }
+        .nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 2; transition: 0.3s; font-size: 15px; }
         .btn-next:hover { background: var(--roxo); }
-        .btn-back { background: transparent; color: #94a3b8; border: 1px solid #f1f5f9; border-radius: 14px; font-weight: 600; cursor: pointer; flex: 1; }
+        .btn-back { background: transparent; color: #94a3b8; border: 1px solid #f1f5f9; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 1; font-size: 15px; }
 
-        .option-btn { padding: 12px; border: 2px solid #f8fafc; border-radius: 14px; cursor: pointer; font-weight: 600; background: var(--branco); margin-bottom: 8px; text-align: center; font-size: 14px; }
+        .option-btn { padding: 11px; border: 2px solid #f8fafc; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--branco); margin-bottom: 6px; text-align: center; font-size: 13px; }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
 
-        .rev-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
-        .rev-label { font-weight: 800; color: #cbd5e1; text-transform: uppercase; font-size: 10px; }
+        .rev-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f1f5f9; font-size: 12px; }
+        .rev-label { font-weight: 800; color: #cbd5e1; text-transform: uppercase; font-size: 9px; }
         .rev-val { font-weight: 600; color: var(--preto); text-align: right; }
     </style>
 </head>
@@ -116,9 +97,7 @@
 
     <header class="main-header">
         <img src="Frame 26.png" alt="Logo Bootcamp" class="logo-img" onerror="this.style.display='none'">
-        <div class="progress-wrap">
-            <div class="progress-bar" id="bar"></div>
-        </div>
+        <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     </header>
 
     <main class="container">
@@ -154,7 +133,7 @@
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Especifique..." style="display:none; margin-top: 10px;">
+            <input type="text" id="perfil_outro" placeholder="Especifique..." style="display:none; margin-top: 5px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
         </div>
 
@@ -166,7 +145,7 @@
                 <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'G', 'camisa')">G</div>
                 <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'Outros', 'camisa')">Outros</div>
             </div>
-            <input type="text" id="camisa_outro" placeholder="Qual tamanho?" style="display:none; margin-top: 10px;">
+            <input type="text" id="camisa_outro" placeholder="Qual tamanho?" style="display:none; margin-top: 5px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
         </div>
 
@@ -176,20 +155,20 @@
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
             </div>
-            <input type="text" id="acesso_detalhe" placeholder="Quais adaptações?" style="display:none; margin-top: 10px;">
+            <input type="text" id="acesso_detalhe" placeholder="Quais adaptações?" style="display:none; margin-top: 5px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
         </div>
 
         <div class="step-card" id="s8">
             <h2>Revise seus dados</h2>
-            <div id="review-content" style="margin-bottom: 20px; overflow-y: auto;"></div>
+            <div id="review-content" style="margin-bottom: 15px; overflow-y: auto;"></div>
             <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Corrigir</button><button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button></div>
         </div>
 
-        <div class="step-card" id="sFinal" style="text-align: center; justify-content: center; min-height: 300px;">
-            <div style="color: var(--roxo); font-size: 50px; margin-bottom: 10px;">●</div>
+        <div class="step-card" id="sFinal" style="text-align: center; justify-content: center; min-height: 200px;">
+            <div style="color: var(--roxo); font-size: 40px; margin-bottom: 10px;">●</div>
             <h2>Inscrição Realizada!</h2>
-            <p style="color: #64748b;">Sucesso! Verifique seu e-mail.</p>
+            <p style="color: #64748b; font-size: 14px;">Sucesso! Verifique seu e-mail.</p>
         </div>
     </main>
 
