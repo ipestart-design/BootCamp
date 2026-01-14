@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootcamp Ideação | 2026</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          // Sua Public Key inserida com sucesso
+          emailjs.init("IK3d5cmy1bv13ZBEl");
+       })();
+    </script>
+
     <style>
-        :root { --amarelo: #F2C94C; --roxo: #6C4BFF; --verde: #6BCF9D; --preto: #000000; --branco: #FFFFFF; }
-        body { margin: 0; padding: 0; font-family: 'Manrope', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: var(--branco); }
+        :root { 
+            --amarelo: #F2C94C; --roxo: #6C4BFF; --verde: #6BCF9D; 
+            --preto: #000000; --branco: #FFFFFF; 
+        }
+        
+        body { 
+            margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
+            height: 100vh; display: flex; justify-content: center; 
+            align-items: center; overflow: hidden; background-color: var(--branco); 
+        }
 
         .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(80px); opacity: 0.4; }
         .blob { position: absolute; width: 600px; height: 600px; border-radius: 50%; animation: move 25s infinite alternate; }
@@ -16,26 +34,34 @@
         .blob-3 { background: var(--verde); top: 30%; left: 20%; }
         @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(150px, 100px) scale(1.2); } }
 
-        /* ESPAÇO PARA O LOGO */
-        .logo-container { position: fixed; top: 40px; text-align: center; width: 100%; }
-        .logo-placeholder { width: 120px; height: auto; margin-bottom: 20px; }
+        .logo-container { position: fixed; top: 30px; text-align: center; width: 100%; }
+        .logo-img { width: 100px; height: auto; }
 
-        .progress-wrap { position: fixed; top: 120px; width: 320px; height: 8px; background: #f1f5f9; border-radius: 10px; }
+        .progress-wrap { position: fixed; top: 110px; width: 320px; height: 8px; background: #f1f5f9; border-radius: 10px; }
         .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); border-radius: 10px; transition: 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
 
         .card-stack { position: relative; width: 100%; max-width: 480px; height: 580px; }
-        .step-card { background: var(--branco); padding: 45px; border-radius: 24px; position: absolute; width: 100%; box-sizing: border-box; display: none; flex-direction: column; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15); border: 1px solid #f1f5f9; }
+        .step-card { 
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
+            padding: 45px; border-radius: 24px; position: absolute; width: 100%; 
+            box-sizing: border-box; display: none; flex-direction: column; 
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.7); 
+        }
         .step-card.active { display: flex; animation: slideUp 0.5s ease forwards; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 26px; font-weight: 800; margin-bottom: 25px; color: var(--preto); letter-spacing: -1px; line-height: 1.1; }
-        input { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #e2e8f0; font-size: 18px; font-family: 'Manrope', sans-serif; outline: none; transition: 0.3s; margin-bottom: 20px; background: transparent; }
+        h2 { font-size: 26px; font-weight: 800; margin-bottom: 25px; color: var(--preto); letter-spacing: -1px; }
+        input { 
+            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #e2e8f0; 
+            font-size: 18px; font-family: 'Manrope', sans-serif; outline: none; 
+            transition: 0.3s; margin-bottom: 20px; background: transparent; 
+        }
         input:focus { border-bottom-color: var(--roxo); }
 
-        .nav-buttons { display: flex; gap: 15px; margin-top: auto; padding-top: 10px; }
+        .nav-buttons { display: flex; gap: 15px; margin-top: auto; }
         .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 18px; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 2; transition: 0.3s; }
         .btn-next:hover { background: var(--roxo); }
-        .btn-back { background: var(--branco); color: #94a3b8; border: 1px solid #e2e8f0; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 1; }
+        .btn-back { background: transparent; color: #94a3b8; border: 1px solid #e2e8f0; border-radius: 12px; font-weight: 600; cursor: pointer; flex: 1; }
 
         .option-btn { padding: 12px; border: 2px solid #f1f5f9; border-radius: 12px; cursor: pointer; font-weight: 600; background: var(--branco); margin-bottom: 8px; text-align: center; font-size: 14px; }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
@@ -47,14 +73,10 @@
 </head>
 <body>
 
-    <div class="aurora-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+    <div class="aurora-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 
     <div class="logo-container">
-        <img src="logo.png" alt="Logo Bootcamp" class="logo-placeholder" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
     </div>
 
     <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
@@ -92,7 +114,7 @@
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Empreendedor', 'perfil')">Empreendedor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Qual seu perfil?" style="display:none; margin-top: 10px;">
+            <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none; margin-top: 10px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
         </div>
 
@@ -121,7 +143,7 @@
         <div class="step-card" id="s8">
             <h2>Revise seus dados</h2>
             <div id="review-content" style="margin-bottom: 15px; overflow-y: auto; max-height: 250px;"></div>
-            <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Corrigir</button><button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button></div>
+            <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Corrigir</button><button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar Inscrição</button></div>
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center;">
@@ -139,7 +161,6 @@
             document.querySelectorAll('.'+group).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             form[field] = val;
-            
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'camisa') document.getElementById('camisa_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
@@ -149,6 +170,7 @@
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
+
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, '');
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
@@ -187,7 +209,6 @@
             const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
             const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const aF = form.acesso === 'Sim' ? 'Sim: ' + document.getElementById('acesso_detalhe').value : 'Não';
-            
             const data = [
                 {l: 'Nome', v: document.getElementById('nome').value},
                 {l: 'E-mail', v: document.getElementById('email').value},
@@ -202,27 +223,44 @@
         async function finish() {
             const btn = document.getElementById('confirm-btn');
             btn.innerText = "Processando..."; btn.disabled = true;
-            
+
+            const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
+            const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
+            const aF = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
+
             const payload = {
                 nome: document.getElementById('nome').value,
                 email: document.getElementById('email').value,
                 tel: document.getElementById('tel').value,
                 cpf: document.getElementById('cpf').value,
-                perfil: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil,
-                tamanho_camisa: form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa,
-                acessibilidade: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Nenhuma'
+                perfil: pF,
+                tamanho_camisa: cF,
+                acessibilidade: aF
             };
 
             try {
+                // 1. Enviar para Planilha (SheetDB)
                 await fetch('https://sheetdb.io/api/v1/1v92fwgtl98vd', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ data: [payload] })
                 });
+
+                // 2. Disparar E-mail (EmailJS) - Usando seu Service ID e Template ID
+                await emailjs.send("service_clqnr6o", "template_13fmvbj", {
+                    nome: payload.nome,
+                    email: payload.email,
+                    perfil: payload.perfil
+                });
+
                 document.getElementById('s8').style.display = 'none';
                 document.getElementById('sFinal').style.display = 'flex';
                 document.getElementById('sFinal').classList.add('active');
                 document.getElementById('bar').style.width = '100%';
-            } catch (e) { alert("Erro ao enviar."); btn.disabled = false; btn.innerText = "Confirmar"; }
+
+            } catch (e) { 
+                alert("Erro ao finalizar inscrição. Tente novamente."); 
+                btn.disabled = false; btn.innerText = "Confirmar Inscrição";
+            }
         }
     </script>
 </body>
