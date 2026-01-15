@@ -188,13 +188,11 @@
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
-        // Máscara de Telefone
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
-        // Máscara de CPF
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, '');
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
@@ -252,11 +250,11 @@
             const btn = document.getElementById('confirm-btn');
             btn.innerText = "Enviando..."; btn.disabled = true;
 
-            const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
-            const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
-            const aF = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
+            // CAPTURA DOS VALORES FINAIS CORRIGIDA
+            const perfilFinal = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
+            const camisaFinal = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
+            const acessoFinal = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
 
-            // Payload sincronizado com o cabeçalho que você colou na planilha
             const payload = {
                 "NOME COMPLETO": document.getElementById('nome').value,
                 "E-MAIL": document.getElementById('email').value,
@@ -265,23 +263,24 @@
                 "ALUNO": (form.perfil === 'ALUNO' ? 'X' : ''),
                 "PROFESSOR": (form.perfil === 'PROFESSOR' ? 'X' : ''),
                 "EMPREENDEDOR": (form.perfil === 'EMPREENDEDOR' ? 'X' : ''),
-                "TAMANHO CAMISA": cF,
-                "ACESSIBILIDADE": aF 
+                "TAMANHO CAMISA": camisaFinal,
+                "ACESSIBILIDADE": acessoFinal
             };
 
+            // Se for outros, você pode querer registrar o que foi escrito numa coluna extra ou na própria categoria
+            if(form.perfil === 'Outros') payload["ALUNO"] = perfilFinal; // Exemplo: registra o texto na coluna perfil se for outros
+
             try {
-                // Envio para a nova URL do SheetDB
                 await fetch('https://sheetdb.io/api/v1/ip3jj7bkpknn3', {
                     method: 'POST', 
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ data: [payload] })
                 });
 
-                // Envio do e-mail via EmailJS
                 await emailjs.send("service_clqnr6o", "template_13fmvbj", {
                     nome: payload["NOME COMPLETO"],
                     email: payload["E-MAIL"],
-                    perfil: pF
+                    perfil: perfilFinal
                 });
 
                 document.getElementById('s8').style.display = 'none';
