@@ -126,7 +126,7 @@
         </div>
 
         <div class="step-card" id="s5">
-            <h2>Qual seu perfil?</h2>
+            <h2>Qual o seu perfil?</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
@@ -250,8 +250,7 @@
             const btn = document.getElementById('confirm-btn');
             btn.innerText = "Enviando..."; btn.disabled = true;
 
-            // CAPTURA DOS VALORES FINAIS CORRIGIDA
-            const perfilFinal = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
+            const perfilOutrosTexto = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : "";
             const camisaFinal = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const acessoFinal = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
 
@@ -263,12 +262,10 @@
                 "ALUNO": (form.perfil === 'ALUNO' ? 'X' : ''),
                 "PROFESSOR": (form.perfil === 'PROFESSOR' ? 'X' : ''),
                 "EMPREENDEDOR": (form.perfil === 'EMPREENDEDOR' ? 'X' : ''),
-                "TAMANHO CAMISA": camisaFinal,
+                "PERFIL OUTROS": perfilOutrosTexto,
+                "TAMANHO DA CAMISA": camisaFinal,
                 "ACESSIBILIDADE": acessoFinal
             };
-
-            // Se for outros, você pode querer registrar o que foi escrito numa coluna extra ou na própria categoria
-            if(form.perfil === 'Outros') payload["ALUNO"] = perfilFinal; // Exemplo: registra o texto na coluna perfil se for outros
 
             try {
                 await fetch('https://sheetdb.io/api/v1/ip3jj7bkpknn3', {
@@ -280,7 +277,7 @@
                 await emailjs.send("service_clqnr6o", "template_13fmvbj", {
                     nome: payload["NOME COMPLETO"],
                     email: payload["E-MAIL"],
-                    perfil: perfilFinal
+                    perfil: form.perfil === 'Outros' ? perfilOutrosTexto : form.perfil
                 });
 
                 document.getElementById('s8').style.display = 'none';
