@@ -23,38 +23,39 @@
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
             min-height: 100vh; display: flex; flex-direction: column; 
-            align-items: center; background-color: var(--preto); /* Fundo Preto como pedido */
+            align-items: center; background-color: var(--preto);
             overflow-x: hidden;
             color: var(--branco);
         }
 
-        /* --- FUNDO DINÂMICO DARK --- */
+        /* --- FUNDO DINÂMICO DARK PURPLE --- */
         .aurora-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1;
-            background: #050505;
+            background: #08031a; /* Fundo preto puxado pro roxo bem escuro */
             overflow: hidden;
         }
 
         .blob {
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5; /* Opacidade ajustada para o brilho no preto */
+            filter: blur(100px);
+            opacity: 0.45;
             animation: move 20s infinite alternate;
         }
 
-        .blob-1 { background: var(--roxo); top: -10%; left: -10%; }
-        .blob-2 { background: var(--amarelo); bottom: -15%; right: -5%; animation-delay: -5s; }
-        .blob-3 { background: var(--verde); top: 30%; left: 50%; animation-delay: -10s; }
+        /* Foco maior no Roxo e Preto conforme pedido */
+        .blob-roxo-1 { background: var(--roxo); top: -10%; left: -10%; }
+        .blob-roxo-2 { background: #4a2ec2; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-detalhe { background: var(--amarelo); top: 40%; left: 30%; opacity: 0.15; } /* Detalhe discreto da paleta */
 
         @keyframes move {
             from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(100px, 100px) scale(1.2); }
+            to { transform: translate(150px, 100px) scale(1.1); }
         }
 
         .main-header {
@@ -66,7 +67,7 @@
             gap: 15px;
         }
         
-        .logo-img { width: 180px; height: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        .logo-img { width: 180px; height: auto; filter: drop-shadow(0 0 15px rgba(108, 75, 255, 0.3)); }
         
         .progress-wrap { width: 260px; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; overflow: hidden; }
         .progress-bar { height: 100%; width: 12.5%; background: var(--roxo); transition: width 0.7s ease; box-shadow: 0 0 15px var(--roxo); }
@@ -78,18 +79,17 @@
             box-sizing: border-box;
         }
 
-        /* --- CARD GLASSMORPHISM DARK --- */
         .step-card { 
-            background: rgba(255, 255, 255, 0.08); /* Vidro translúcido */
+            background: rgba(255, 255, 255, 0.07); 
             backdrop-filter: blur(25px); 
             -webkit-backdrop-filter: blur(25px);
             padding: 35px; 
             border-radius: 32px; 
             display: none; 
             flex-direction: column; 
-            box-shadow: 0 25px 50px -15px rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            animation: slideUp 0.5s ease forwards;
+            box-shadow: 0 25px 50px -15px rgba(0,0,0,0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.12); 
+            animation: slideUp 0.5s ease-out forwards;
         }
 
         .step-card.active { display: flex; }
@@ -97,18 +97,18 @@
 
         h2 { font-size: 22px; font-weight: 600; margin-bottom: 25px; color: var(--branco); letter-spacing: -0.5px; line-height: 1.2; }
         
-        input { 
+        input, textarea { 
             width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.1); 
             font-size: 17px; font-family: 'Manrope'; font-weight: 400;
             outline: none; transition: 0.3s; margin-bottom: 25px; background: transparent; color: var(--branco);
         }
-        input:focus { border-bottom-color: var(--roxo); }
-        input::placeholder { color: rgba(255,255,255,0.4); }
+        input:focus, textarea:focus { border-bottom-color: var(--roxo); }
+        textarea { resize: none; height: 80px; border-bottom: 2px solid rgba(255,255,255,0.1); }
 
         .nav-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .btn-next { background: var(--branco); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 600; cursor: pointer; flex: 2; transition: 0.3s; font-size: 15px; }
+        .btn-next { background: var(--branco); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; flex: 2; transition: 0.3s; font-size: 15px; }
         .btn-next:hover { background: var(--roxo); color: var(--branco); }
-        .btn-back { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; font-weight: 600; cursor: pointer; flex: 1; font-size: 15px; }
+        .btn-back { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; font-weight: 700; cursor: pointer; flex: 1; font-size: 15px; }
 
         .option-btn { padding: 12px; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 14px; cursor: pointer; font-weight: 600; background: rgba(255,255,255,0.05); margin-bottom: 8px; text-align: center; font-size: 14px; color: var(--branco); transition: 0.2s; }
         .option-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--roxo); }
@@ -122,13 +122,13 @@
 <body>
 
     <div class="aurora-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+        <div class="blob blob-roxo-1"></div>
+        <div class="blob blob-roxo-2"></div>
+        <div class="blob blob-detalhe"></div>
     </div>
 
     <header class="main-header">
-        <img src="Frame 26.png" alt="Logo Bootcamp" class="logo-img" onerror="this.style.display='none'">
+        <img src="Frame 26.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     </header>
 
@@ -165,19 +165,13 @@
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
                 <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Especifique..." style="display:none; margin-top: 10px; border-bottom: 2px solid var(--roxo);">
+            <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none; margin-top: 10px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s6">
-            <h2>Tamanho da Camisa</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'P', 'camisa')">P</div>
-                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'M', 'camisa')">M</div>
-                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'G', 'camisa')">G</div>
-                <div class="option-btn c-opt" onclick="selectOpt('c-opt', this, 'Outros', 'camisa')">Outros</div>
-            </div>
-            <input type="text" id="camisa_outro" placeholder="Qual tamanho?" style="display:none; margin-top: 10px; border-bottom: 2px solid var(--roxo);">
+            <h2>Quais suas expectativas para o Bootcamp?</h2>
+            <textarea id="expectativas" placeholder="Conte-nos o que você espera aprender ou alcançar..."></textarea>
             <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
         </div>
 
@@ -187,7 +181,7 @@
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
                 <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
             </div>
-            <input type="text" id="acesso_detalhe" placeholder="Quais adaptações?" style="display:none; margin-top: 10px; border-bottom: 2px solid var(--roxo);">
+            <input type="text" id="acesso_detalhe" placeholder="Quais adaptações?" style="display:none; margin-top: 10px;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
         </div>
 
@@ -201,14 +195,14 @@
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center; min-height: 200px;">
-            <div style="color: var(--verde); font-size: 40px; margin-bottom: 10px;">●</div>
+            <div style="color: var(--roxo); font-size: 40px; margin-bottom: 10px;">●</div>
             <h2>Inscrição Realizada!</h2>
             <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Sucesso! Verifique seu e-mail.</p>
         </div>
     </main>
 
     <script>
-        let form = { perfil: "", camisa: "", acesso: "" };
+        let form = { perfil: "", acesso: "" };
         const totalSteps = 8;
 
         function selectOpt(group, btn, val, field) {
@@ -216,7 +210,6 @@
             btn.classList.add('selected');
             form[field] = val;
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
-            if(field === 'camisa') document.getElementById('camisa_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
@@ -236,7 +229,7 @@
         function next(step) {
             if(step <= 4 && document.getElementById(['nome','email','tel','cpf'][step-1]).value.length < 3) return;
             if(step === 5 && !form.perfil) return;
-            if(step === 6 && !form.camisa) return;
+            if(step === 6 && document.getElementById('expectativas').value.length < 3) return;
             if(step === 7 && !form.acesso) return;
             if(step === 7) renderReview();
 
@@ -264,9 +257,16 @@
 
         function renderReview() {
             const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
-            const cF = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const aF = form.acesso === 'Sim' ? 'Sim: ' + document.getElementById('acesso_detalhe').value : 'Não';
-            const data = [{l:'Nome', v:document.getElementById('nome').value},{l:'E-mail', v:document.getElementById('email').value},{l:'WhatsApp', v:document.getElementById('tel').value},{l:'CPF', v:document.getElementById('cpf').value},{l:'Perfil', v:pF},{l:'Camisa', v:cF},{l:'Acesso', v:aF}];
+            const data = [
+                {l: 'Nome', v: document.getElementById('nome').value},
+                {l: 'E-mail', v: document.getElementById('email').value},
+                {l: 'WhatsApp', v: document.getElementById('tel').value},
+                {l: 'CPF', v: document.getElementById('cpf').value},
+                {l: 'Perfil', v: pF},
+                {l: 'Expectativas', v: document.getElementById('expectativas').value},
+                {l: 'Acesso', v: aF}
+            ];
             document.getElementById('review-content').innerHTML = data.map(i => `<div class="rev-row"><span class="rev-label">${i.l}</span><span class="rev-val">${i.v}</span></div>`).join('');
         }
 
@@ -275,7 +275,6 @@
             btn.innerText = "Enviando..."; btn.disabled = true;
 
             const perfilOutrosTexto = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : "";
-            const camisaFinal = form.camisa === 'Outros' ? document.getElementById('camisa_outro').value : form.camisa;
             const acessoFinal = form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não';
 
             const payload = {
@@ -287,7 +286,7 @@
                 "PROFESSOR": (form.perfil === 'PROFESSOR' ? 'X' : ''),
                 "EMPREENDEDOR": (form.perfil === 'EMPREENDEDOR' ? 'X' : ''),
                 "PERFIL OUTROS": perfilOutrosTexto,
-                "TAMANHO DA CAMISA": camisaFinal,
+                "EXPECTATIVAS": document.getElementById('expectativas').value,
                 "ACESSIBILIDADE": acessoFinal
             };
 
