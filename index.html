@@ -32,18 +32,17 @@
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-color: var(--roxo); /* Cor de fundo caso a imagem demore a carregar */
+            background-color: var(--roxo);
             overflow-x: hidden;
             color: var(--branco);
         }
 
-        /* Camada para garantir que o fundo não atrapalhe a leitura */
         .aurora-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1;
-            background: rgba(0, 0, 0, 0.15); /* Escurece a imagem levemente */
+            background: rgba(0, 0, 0, 0.15); 
         }
 
         .main-header {
@@ -59,7 +58,15 @@
         .logo-img { width: 180px; height: auto; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); }
         
         .progress-wrap { width: 260px; height: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--preto); transition: width 0.7s ease; }
+        
+        /* BARRA ALTERADA PARA AMARELO */
+        .progress-bar { 
+            height: 100%; 
+            width: 12.5%; 
+            background: var(--amarelo); 
+            transition: width 0.7s ease; 
+            box-shadow: 0 0 10px rgba(242, 201, 76, 0.4);
+        }
 
         .container {
             width: 100%;
@@ -70,7 +77,7 @@
         }
 
         .step-card { 
-            background: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+            background: rgba(0, 0, 0, 0.5); 
             backdrop-filter: blur(15px); 
             -webkit-backdrop-filter: blur(15px);
             padding: 35px; 
