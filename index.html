@@ -17,8 +17,7 @@
     <style>
         :root { 
             --amarelo: #F2C94C; 
-            --roxo: #7B5DFF; /* Roxo vibrante da imagem */
-            --verde: #6BCF9D; 
+            --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
         }
@@ -27,39 +26,24 @@
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
             min-height: 100vh; display: flex; flex-direction: column; 
             align-items: center; 
-            background-color: var(--roxo);
+            /* CONFIGURAÇÃO DA IMAGEM DE FUNDO */
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: var(--roxo); /* Cor de fundo caso a imagem demore a carregar */
             overflow-x: hidden;
             color: var(--branco);
         }
 
-        /* --- NOVO FUNDO PADRÃO BOOTCAMP (Pílulas + Faixas) --- */
+        /* Camada para garantir que o fundo não atrapalhe a leitura */
         .aurora-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1;
-            background-color: var(--roxo);
-            /* Padrão de Pílulas Pretas */
-            background-image: 
-                radial-gradient(ellipse at center, var(--preto) 35%, transparent 40%),
-                radial-gradient(ellipse at center, var(--preto) 35%, transparent 40%);
-            background-size: 180px 90px;
-            background-position: 0 0, 90px 45px;
-        }
-
-        /* Camada das Faixas Horizontais Pretas */
-        .aurora-bg::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 80px,
-                rgba(0, 0, 0, 0.9) 80px,
-                rgba(0, 0, 0, 0.9) 110px
-            );
+            background: rgba(0, 0, 0, 0.15); /* Escurece a imagem levemente */
         }
 
         .main-header {
@@ -74,8 +58,8 @@
         
         .logo-img { width: 180px; height: auto; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); }
         
-        .progress-wrap { width: 260px; height: 8px; background: rgba(0, 0, 0, 0.2); border-radius: 20px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--preto); transition: width 0.7s ease; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        .progress-wrap { width: 260px; height: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--preto); transition: width 0.7s ease; }
 
         .container {
             width: 100%;
@@ -86,15 +70,15 @@
         }
 
         .step-card { 
-            background: rgba(108, 75, 255, 0.85); /* Roxo mais sólido para legibilidade */
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
             padding: 35px; 
             border-radius: 32px; 
             display: none; 
             flex-direction: column; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             animation: slideUp 0.5s ease-out forwards;
         }
 
@@ -104,20 +88,20 @@
         h2 { font-size: 24px; font-weight: 800; margin-bottom: 25px; color: var(--branco); letter-spacing: -0.5px; line-height: 1.2; }
         
         input, textarea { 
-            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.3); 
+            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.4); 
             font-size: 17px; font-family: 'Manrope'; font-weight: 400;
             outline: none; transition: 0.3s; margin-bottom: 25px; background: transparent; color: var(--branco);
         }
-        input:focus, textarea:focus { border-bottom-color: var(--preto); }
+        input:focus, textarea:focus { border-bottom-color: var(--amarelo); }
         textarea { resize: none; height: 80px; }
 
         .nav-buttons { display: flex; gap: 10px; margin-top: 15px; }
         .btn-next { background: var(--preto); color: var(--branco); border: none; padding: 16px; border-radius: 14px; font-weight: 800; cursor: pointer; flex: 2; transition: 0.3s; font-size: 15px; text-transform: uppercase; }
-        .btn-next:hover { background: var(--branco); color: var(--preto); }
+        .btn-next:hover { background: var(--amarelo); color: var(--preto); }
         .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.4); border-radius: 14px; font-weight: 700; cursor: pointer; flex: 1; font-size: 15px; }
 
-        .option-btn { padding: 12px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 14px; cursor: pointer; font-weight: 600; background: rgba(0,0,0,0.1); margin-bottom: 8px; text-align: center; font-size: 14px; color: var(--branco); transition: 0.2s; }
-        .option-btn:hover { background: rgba(0,0,0,0.3); border-color: var(--preto); }
+        .option-btn { padding: 12px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 14px; cursor: pointer; font-weight: 600; background: rgba(255,255,255,0.05); margin-bottom: 8px; text-align: center; font-size: 14px; color: var(--branco); transition: 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--amarelo); }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
 
         .rev-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
@@ -197,14 +181,13 @@
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center; justify-content: center; min-height: 200px;">
-            <div style="color: var(--preto); font-size: 40px; margin-bottom: 10px;">●</div>
+            <div style="color: var(--amarelo); font-size: 40px; margin-bottom: 10px;">●</div>
             <h2>Inscrição Realizada!</h2>
-            <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Sucesso! Verifique seu e-mail.</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 14px;">Sucesso! Verifique seu e-mail.</p>
         </div>
     </main>
 
     <script>
-        // O script permanece exatamente o mesmo que o seu original
         let form = { perfil: "", acesso: "" };
         const totalSteps = 8;
 
