@@ -16,9 +16,8 @@
             --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
-            /* Cor do vidro (Glass) */
-            --glass-bg: rgba(0, 0, 0, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-bg: rgba(0, 0, 0, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.12);
         }
         
         body { 
@@ -28,121 +27,111 @@
             background-color: var(--roxo); color: var(--branco); overflow-x: hidden;
         }
 
-        /* Camada para aumentar o contraste geral */
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: -1; }
+        .container-lp { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        section { padding: 30px 0; animation: fadeIn 0.8s ease-in-out; }
 
-        .container-lp { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        
-        section { padding: 40px 0; animation: fadeIn 1s ease-in-out; }
-
-        /* --- EFEITO GLASS --- */
+        /* --- GLASS EFFECT --- */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 28px;
             border: 1px solid var(--glass-border);
             padding: 40px;
-            box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.37);
-            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin: 25px 0;
         }
 
-        h1 { font-size: clamp(32px, 8vw, 60px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-align: center; }
-        h2 { font-size: 32px; font-weight: 800; color: var(--amarelo); margin-bottom: 20px; }
-        h3 { color: var(--amarelo); font-size: 24px; margin-bottom: 15px; }
-        p { font-size: 18px; line-height: 1.6; opacity: 0.9; margin-bottom: 20px; }
+        h1 { font-size: clamp(32px, 7vw, 56px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-align: center; }
+        h2 { font-size: 28px; font-weight: 800; color: var(--amarelo); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { color: var(--amarelo); font-size: 22px; margin: 0 0 10px 0; }
+        p { font-size: 17px; line-height: 1.6; opacity: 0.95; margin-bottom: 20px; }
 
         .cta-button {
-            background: var(--amarelo); color: var(--preto); padding: 20px 40px; border-radius: 50px;
+            background: var(--amarelo); color: var(--preto); padding: 18px 36px; border-radius: 50px;
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer;
-            font-size: 16px; transition: 0.3s; display: inline-block; text-decoration: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            font-size: 15px; transition: 0.3s; display: inline-block; text-decoration: none;
         }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(242, 201, 76, 0.4); }
+        .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(242, 201, 76, 0.4); }
 
-        .grid-conceito { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-        .item-conceito { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid var(--amarelo); }
-        .item-conceito strong { display: block; font-size: 18px; color: var(--amarelo); margin-bottom: 5px; }
+        /* --- MENTOR SECTION --- */
+        .mentor-grid { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+        .mentor-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; flex-shrink: 0; }
+        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-right: 8px; display: inline-block; margin-bottom: 10px; }
 
-        .entrega-list { list-style: none; padding: 0; }
-        .entrega-list li { margin-bottom: 15px; padding-left: 30px; position: relative; font-size: 17px; }
-        .entrega-list li::before { content: '✓'; position: absolute; left: 0; color: var(--amarelo); font-weight: 800; }
-
-        .mentor-box { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; }
-        .mentor-img { width: 180px; height: 180px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; }
-
-        /* --- FORMULÁRIO OVERLAY --- */
+        /* --- FORM OVERLAY --- */
         #form-wrapper { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(10, 5, 25, 0.95); z-index: 1000; overflow-y: auto; 
+            background: rgba(15, 10, 35, 0.98); z-index: 1000; overflow-y: auto; 
             align-items: center; justify-content: center; flex-direction: column; 
         }
-        
-        .progress-wrap { width: 260px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.7s ease; }
-        
-        .step-card { background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(20px); padding: 40px; border-radius: 32px; width: 90%; max-width: 440px; display: none; flex-direction: column; border: 1px solid var(--glass-border); }
+        .progress-wrap { width: 260px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; }
+        .step-card { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); padding: 40px; border-radius: 32px; width: 90%; max-width: 420px; display: none; flex-direction: column; border: 1px solid var(--glass-border); }
         .step-card.active { display: flex; animation: slideUp 0.4s ease-out; }
 
-        input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.3); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; }
+        input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; transition: 0.3s; }
         input:focus { border-bottom-color: var(--amarelo); }
-
         .nav-buttons { display: flex; gap: 10px; }
-        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; text-transform: uppercase; }
+        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; }
         .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; flex: 1; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
 
     <div id="lp-content" class="container-lp">
-        <header style="text-align: center;">
-            <img src="Frame 26.png" alt="Logo" style="width: 140px; margin-bottom: 20px;">
+        <header style="text-align: center; margin-bottom: 40px;">
+            <img src="Frame 26.png" alt="Logo IpêTech" style="width: 130px; margin-bottom: 20px;">
             <h1>Pare de imaginar e <br><span style="color:var(--amarelo)">comece a validar!</span></h1>
-            <p style="text-align: center; margin: 0 auto 30px auto;">No Bootcamp de Ideação, você irá iniciar a sua jornada encontrando um problema real para resolver e irá terminar o validando. Aprenda com Décio Antônio e o IpêTech UFLA.</p>
+            <p>Encontre um problema real para resolver e termine validando sua solução com dados do mercado.</p>
             <button class="cta-button" onclick="showForm()">Quero evoluir minha ideia</button>
         </header>
 
         <section class="glass-card">
             <h2>Conceito: Problema Primeiro</h2>
-            <p>Muitos empreendedores falham porque se apaixonam pela solução antes de entender o problema e principalmente: <strong>se ele existe no mundo real!</strong></p>
-            <div class="grid-conceito">
-                <div class="item-conceito"><strong>Foco na Realidade</strong> Mapeamento de dores reais e busca por evidências.</div>
-                <div class="item-conceito"><strong>Decisões em Dados</strong> Substituímos suposições por dados de mercado.</div>
-                <div class="item-conceito"><strong>Aprendizado Consciente</strong> Validação da dor e abertura para mudança.</div>
+            <p>Muitos empreendedores falham porque se apaixonam pela solução antes de entender se o problema existe no mundo real. <strong>Aqui, invertemos a lógica:</strong></p>
+            <div style="margin-top: 20px;">
+                <p>• <strong>Foco na Realidade:</strong> Mapeamento de dores reais.<br>
+                • <strong>Decisões Baseadas em Dados:</strong> Menos "eu acho", mais evidências.<br>
+                • <strong>Aprendizado Acelerado:</strong> Validação prática com o cliente.</p>
             </div>
         </section>
 
         <section class="glass-card">
-            <h2>O que será entregue?</h2>
-            <p>Muito mais que um plano, você sairá com ferramentas práticas para o seu futuro negócio:</p>
-            <ul class="entrega-list">
-                <li><strong>Mapa do Problema:</strong> Clareza total sobre o desafio real.</li>
-                <li><strong>Persona & JTBD:</strong> Conexão profunda com a necessidade do cliente.</li>
-                <li><strong>VPC & Lean Canvas:</strong> O desenho estratégico da proposta de valor.</li>
-                <li><strong>Protótipo V2:</strong> Sua ideia testada com feedbacks reais.</li>
+            <h2>O que você recebe</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 12px;">✅ <strong>Mapa do Problema:</strong> Clareza total sobre o desafio.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Persona & JTBD:</strong> Conexão profunda com o seu cliente.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>VPC & Lean Canvas:</strong> Desenho da sua proposta de valor.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Protótipo V2:</strong> Relatório de testes com feedbacks reais.</li>
             </ul>
-            <center><button class="cta-button" onclick="showForm()">Iniciar minha jornada agora</button></center>
         </section>
 
-        <section class="glass-card mentor-box">
-            <img src="foto-decio.jpg" alt="Décio Antônio" class="mentor-img" onerror="this.src='https://via.placeholder.com/180?text=Décio'">
-            <div style="flex:1; min-width: 280px;">
-                <h3>O Mentor da Jornada</h3>
-                <p><strong>Décio Antônio:</strong> Especialista em transformar incertezas em negócios validados. Ele guiará você na realização de entrevistas e testes reais para garantir dados sólidos em mãos.</p>
+        <section class="glass-card">
+            <h2>O Mentor da Jornada</h2>
+            <div class="mentor-grid">
+                <img src="foto-decio.jpg" alt="Décio Antônio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Decio'">
+                <div style="flex:1;">
+                    <h3>Décio Antônio Mendonça</h3>
+                    <div style="margin-bottom: 15px;">
+                        <span class="tag-highlight">Gestor de Inovação</span>
+                        <span class="tag-highlight">Estrategista Digital</span>
+                    </div>
+                    <p>Líder de programas de inovação no <strong>Ipê Tech</strong>, especialista em Bubble.io, FlutterFlow e IA aplicada. Décio vai te tirar da zona de conforto: você conduzirá no mínimo <strong>10 entrevistas e 10 testes</strong>, traduzindo incerteza em critérios objetivos de validação.</p>
+                </div>
             </div>
+            <center><button class="cta-button" onclick="showForm()" style="margin-top: 20px;">Iniciar minha jornada agora</button></center>
         </section>
 
-        <section style="text-align: center;">
+        <section style="text-align: center; padding-bottom: 80px;">
             <h2>O Caminho para o Sucesso</h2>
-            <p>Este é o seu primeiro passo em um ecossistema de inovação. Ao finalizar, você estará apto a avançar para o MVP e Tração.</p>
-            <div class="glass-card">
-                <p>Garanta sua vaga no Bootcamp e transforme sua criatividade em um projeto validado.</p>
-                <button class="cta-button" onclick="showForm()">INSCREVA-SE E SAIA DO ZERO COM UM PROJETO REAL</button>
-            </div>
+            <p>O objetivo é sair com um problema bem definido e uma proposta clara. Este é o seu passaporte para as próximas etapas de <strong>MVP e Tração</strong>.</p>
+            <button class="cta-button" onclick="showForm()">INSCREVA-SE E SAIA DO ZERO COM UM PROJETO REAL</button>
         </section>
     </div>
 
@@ -175,35 +164,35 @@
 
         <div class="step-card" id="s5">
             <h2>Qual o seu perfil?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
-                <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
+                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
+                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
+                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none; margin-top: 10px;">
+            <input type="text" id="perfil_outro" placeholder="Especifique" style="display:none;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s6">
-            <h2>Quais suas expectativas?</h2>
-            <textarea id="expectativas" placeholder="O que você espera aprender?"></textarea>
+            <h2>Suas expectativas?</h2>
+            <textarea id="expectativas" placeholder="O que espera aprender?"></textarea>
             <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
         </div>
 
         <div class="step-card" id="s7">
-            <h2>Necessita de acessibilidade?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
-                <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
+            <h2>Acessibilidade?</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                <div class="option-btn a-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
+                <div class="option-btn a-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
             </div>
-            <input type="text" id="acesso_detalhe" placeholder="Quais adaptações?" style="display:none; margin-top: 10px;">
+            <input type="text" id="acesso_detalhe" placeholder="Quais?" style="display:none;">
             <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
         </div>
 
         <div class="step-card" id="s8">
             <h2>Revise seus dados</h2>
-            <div id="review-content" style="margin-bottom: 15px; font-size: 14px; border-radius: 10px; background: rgba(255,255,255,0.05); padding: 15px;"></div>
+            <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
             <div class="nav-buttons">
                 <button class="btn-back" onclick="back(8)">Corrigir</button>
                 <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
@@ -211,9 +200,9 @@
         </div>
 
         <div class="step-card" id="sFinal" style="text-align: center;">
-            <h2 style="color:var(--amarelo)">Inscrição Realizada!</h2>
-            <p>Sucesso! Verifique seu e-mail.</p>
-            <button class="cta-button" onclick="location.reload()">Voltar</button>
+            <h2 style="color:var(--amarelo)">Sucesso!</h2>
+            <p>Inscrição realizada. Verifique seu e-mail.</p>
+            <button class="cta-button" onclick="location.reload()">Sair</button>
         </div>
     </div>
 
@@ -228,8 +217,12 @@
         const totalSteps = 8;
 
         function selectOpt(group, btn, val, field) {
-            document.querySelectorAll('.'+group).forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+            document.querySelectorAll('.'+group).forEach(b => {
+                b.style.background = 'transparent';
+                b.style.color = 'white';
+            });
+            btn.style.background = 'var(--amarelo)';
+            btn.style.color = 'black';
             form[field] = val;
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
@@ -251,7 +244,7 @@
         function next(step) {
             if(step <= 4 && document.getElementById(['nome','email','tel','cpf'][step-1]).value.length < 3) return;
             if(step === 5 && !form.perfil) return;
-            if(step === 6 && document.getElementById('expectativas').value.length < 3) return;
+            if(step === 6 && document.getElementById('expectativas').value.length < 2) return;
             if(step === 7 && !form.acesso) return;
             if(step === 7) renderReview();
 
@@ -277,18 +270,15 @@
         }
 
         function renderReview() {
-            const pF = form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil;
-            const aF = form.acesso === 'Sim' ? 'Sim: ' + document.getElementById('acesso_detalhe').value : 'Não';
             const data = [
                 {l: 'Nome', v: document.getElementById('nome').value},
                 {l: 'E-mail', v: document.getElementById('email').value},
                 {l: 'WhatsApp', v: document.getElementById('tel').value},
                 {l: 'CPF', v: document.getElementById('cpf').value},
-                {l: 'Perfil', v: pF},
-                {l: 'Expectativas', v: document.getElementById('expectativas').value},
-                {l: 'Acessibilidade', v: aF}
+                {l: 'Perfil', v: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil},
+                {l: 'Acessibilidade', v: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'}
             ];
-            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #444; padding:8px 0"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
+            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
         }
 
         async function finish() {
@@ -302,9 +292,9 @@
                 "ALUNO": (form.perfil === 'ALUNO' ? 'X' : ''),
                 "PROFESSOR": (form.perfil === 'PROFESSOR' ? 'X' : ''),
                 "EMPREENDEDOR": (form.perfil === 'EMPREENDEDOR' ? 'X' : ''),
-                "PERFIL OUTROS": (form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : ""),
+                "PERFIL OUTROS": form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : "",
                 "EXPECTATIVAS": document.getElementById('expectativas').value,
-                "ACESSIBILIDADE": (form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não')
+                "ACESSIBILIDADE": form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'
             };
             try {
                 await fetch('https://sheetdb.io/api/v1/ip3jj7bkpknn3', {
