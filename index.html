@@ -16,26 +16,36 @@
             --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
-            --glass-bg: rgba(0, 0, 0, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-bg: rgba(0, 0, 0, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
         
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
             background-image: url('background.png'); 
-            background-size: cover; background-position: center; background-attachment: fixed;
-            background-color: var(--roxo); color: var(--branco); overflow-x: hidden;
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: var(--roxo); 
+            color: var(--branco); 
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: -1; }
+        /* Camada de contraste fixa para o fundo nunca sumir */
+        .global-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.4); z-index: -1; 
+        }
+
         .container-lp { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         section { padding: 30px 0; animation: fadeIn 0.8s ease-in-out; }
 
-        /* --- GLASS EFFECT --- */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-radius: 28px;
             border: 1px solid var(--glass-border);
             padding: 40px;
@@ -44,35 +54,40 @@
         }
 
         h1 { font-size: clamp(32px, 7vw, 56px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-align: center; }
-        h2 { font-size: 28px; font-weight: 800; color: var(--amarelo); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { font-size: 28px; font-weight: 800; color: var(--amarelo); margin-bottom: 20px; text-transform: uppercase; }
         h3 { color: var(--amarelo); font-size: 22px; margin: 0 0 10px 0; }
-        p { font-size: 17px; line-height: 1.6; opacity: 0.95; margin-bottom: 20px; }
+        p { font-size: 17px; line-height: 1.6; opacity: 0.95; }
 
         .cta-button {
             background: var(--amarelo); color: var(--preto); padding: 18px 36px; border-radius: 50px;
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer;
             font-size: 15px; transition: 0.3s; display: inline-block; text-decoration: none;
         }
-        .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(242, 201, 76, 0.4); }
+        .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(242, 201, 76, 0.5); }
 
-        /* --- MENTOR SECTION --- */
         .mentor-grid { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
         .mentor-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; flex-shrink: 0; }
-        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-right: 8px; display: inline-block; margin-bottom: 10px; }
+        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
 
         /* --- FORM OVERLAY --- */
         #form-wrapper { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(15, 10, 35, 0.98); z-index: 1000; overflow-y: auto; 
+            z-index: 1000; overflow-y: auto; 
             align-items: center; justify-content: center; flex-direction: column; 
+            /* O fundo aqui é apenas o desfoque, a imagem vem do body */
+            backdrop-filter: blur(20px);
+            background: rgba(10, 5, 25, 0.8);
         }
+        
         .progress-wrap { width: 260px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
         .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; }
-        .step-card { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); padding: 40px; border-radius: 32px; width: 90%; max-width: 420px; display: none; flex-direction: column; border: 1px solid var(--glass-border); }
+        
+        .step-card { background: rgba(0, 0, 0, 0.85); padding: 40px; border-radius: 32px; width: 90%; max-width: 420px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
         .step-card.active { display: flex; animation: slideUp 0.4s ease-out; }
 
-        input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; transition: 0.3s; }
+        input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; }
         input:focus { border-bottom-color: var(--amarelo); }
+        .option-btn { padding: 12px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 14px; cursor: pointer; text-align: center; margin-bottom: 8px; transition: 0.2s; }
         .nav-buttons { display: flex; gap: 10px; }
         .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; }
         .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; flex: 1; cursor: pointer; }
@@ -82,56 +97,51 @@
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
+    <div class="global-overlay"></div>
 
     <div id="lp-content" class="container-lp">
         <header style="text-align: center; margin-bottom: 40px;">
             <img src="Frame 26.png" alt="Logo IpêTech" style="width: 130px; margin-bottom: 20px;">
             <h1>Pare de imaginar e <br><span style="color:var(--amarelo)">comece a validar!</span></h1>
-            <p>Encontre um problema real para resolver e termine validando sua solução com dados do mercado.</p>
+            <p>Aprenda a identificar dores reais do mercado, coletar evidências e prototipar com especialistas.</p>
             <button class="cta-button" onclick="showForm()">Quero evoluir minha ideia</button>
         </header>
 
         <section class="glass-card">
             <h2>Conceito: Problema Primeiro</h2>
-            <p>Muitos empreendedores falham porque se apaixonam pela solução antes de entender se o problema existe no mundo real. <strong>Aqui, invertemos a lógica:</strong></p>
-            <div style="margin-top: 20px;">
-                <p>• <strong>Foco na Realidade:</strong> Mapeamento de dores reais.<br>
-                • <strong>Decisões Baseadas em Dados:</strong> Menos "eu acho", mais evidências.<br>
-                • <strong>Aprendizado Acelerado:</strong> Validação prática com o cliente.</p>
-            </div>
+            <p>Muitos falham por se apaixonarem pela solução antes de entender se o problema existe no mundo real. <strong>Aqui, invertemos a lógica:</strong></p>
+            <p>• <strong>Foco na Realidade:</strong> Mapeamento de dores e evidências.<br>
+            • <strong>Decisões Baseadas em Dados:</strong> Menos suposições, mais mercado.<br>
+            • <strong>Aprendizado Acelerado:</strong> Validação direta com o cliente.</p>
         </section>
 
         <section class="glass-card">
-            <h2>O que você recebe</h2>
+            <h2>Entregas da Jornada</h2>
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 12px;">✅ <strong>Mapa do Problema:</strong> Clareza total sobre o desafio.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Persona & JTBD:</strong> Conexão profunda com o seu cliente.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>VPC & Lean Canvas:</strong> Desenho da sua proposta de valor.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Protótipo V2:</strong> Relatório de testes com feedbacks reais.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Mapa do Problema:</strong> Clareza sobre o desafio escolhido.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Persona & JTBD:</strong> Entendimento profundo do cliente.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>VPC & Lean Canvas:</strong> Desenho estratégico da proposta.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Protótipo V2:</strong> Materialização testada com feedbacks.</li>
             </ul>
+            <center><button class="cta-button" onclick="showForm()" style="margin-top: 15px;">Iniciar minha jornada</button></center>
         </section>
 
         <section class="glass-card">
-            <h2>O Mentor da Jornada</h2>
+            <h2>O Mentor</h2>
             <div class="mentor-grid">
                 <img src="foto-decio.jpg" alt="Décio Antônio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Decio'">
                 <div style="flex:1;">
                     <h3>Décio Antônio Mendonça</h3>
-                    <div style="margin-bottom: 15px;">
-                        <span class="tag-highlight">Gestor de Inovação</span>
-                        <span class="tag-highlight">Estrategista Digital</span>
-                    </div>
-                    <p>Líder de programas de inovação no <strong>Ipê Tech</strong>, especialista em Bubble.io, FlutterFlow e IA aplicada. Décio vai te tirar da zona de conforto: você conduzirá no mínimo <strong>10 entrevistas e 10 testes</strong>, traduzindo incerteza em critérios objetivos de validação.</p>
+                    <span class="tag-highlight">Gestor de Inovação</span><span class="tag-highlight">Estrategista</span><span class="tag-highlight">Especialista No-Code</span>
+                    <p style="font-size: 15px; margin-top: 10px;">Líder de programas de inovação no <strong>Ipê Tech</strong> e especialista em transformação digital. Décio guiará você na realização de <strong>10 entrevistas e 10 testes</strong>, traduzindo incertezas em decisões baseadas em dados reais.</p>
                 </div>
             </div>
-            <center><button class="cta-button" onclick="showForm()" style="margin-top: 20px;">Iniciar minha jornada agora</button></center>
         </section>
 
-        <section style="text-align: center; padding-bottom: 80px;">
+        <section style="text-align: center; padding-bottom: 60px;">
             <h2>O Caminho para o Sucesso</h2>
-            <p>O objetivo é sair com um problema bem definido e uma proposta clara. Este é o seu passaporte para as próximas etapas de <strong>MVP e Tração</strong>.</p>
-            <button class="cta-button" onclick="showForm()">INSCREVA-SE E SAIA DO ZERO COM UM PROJETO REAL</button>
+            <p>Este é o seu primeiro passo para o MVP e Tração. Pare de imaginar!</p>
+            <button class="cta-button" onclick="showForm()">INSCREVA-SE E SAIA DO ZERO</button>
         </section>
     </div>
 
@@ -202,7 +212,7 @@
         <div class="step-card" id="sFinal" style="text-align: center;">
             <h2 style="color:var(--amarelo)">Sucesso!</h2>
             <p>Inscrição realizada. Verifique seu e-mail.</p>
-            <button class="cta-button" onclick="location.reload()">Sair</button>
+            <button class="cta-button" onclick="location.reload()">Voltar</button>
         </div>
     </div>
 
