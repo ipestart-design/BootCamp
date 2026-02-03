@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootcamp Ideação | IpêTech UFLA</title>
+    <title>Bootcamp de Ideação 2026 | IpêTech UFLA</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -12,69 +12,108 @@
 
     <style>
         :root { 
-            --amarelo: #F2C94C; --roxo: #7B5DFF; --preto: #000000; --branco: #FFFFFF; 
-            --glass-bg: rgba(0, 0, 0, 0.6); --glass-border: rgba(255, 255, 255, 0.15);
+            --amarelo: #F2C94C; 
+            --roxo: #7B5DFF; 
+            --preto: #000000; 
+            --branco: #FFFFFF; 
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
         
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
-            background-image: url('background.png'); background-size: cover; 
-            background-position: center; background-attachment: fixed;
-            background-repeat: no-repeat; background-color: var(--roxo); 
-            color: var(--branco); overflow-x: hidden; min-height: 100vh;
+            background-image: url('background.png'); 
+            background-size: cover; background-position: center; background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: var(--roxo); color: var(--branco); overflow-x: hidden;
+            min-height: 100vh; scroll-behavior: smooth;
         }
 
-        .global-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); z-index: -1; }
-        .container-main { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        section { padding: 30px 0; animation: fadeIn 0.8s ease-in-out; }
+        .global-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%); z-index: -1; 
+        }
 
-        /* --- EFEITO GLASS --- */
+        .container-main { width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- ULTRA GLASS EFFECT --- */
         .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-radius: 28px; border: 1px solid var(--glass-border); padding: 35px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); margin: 25px 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            margin: 30px 0;
+            transition: all 0.3s ease;
         }
+        .glass-card:hover { border-color: var(--amarelo); transform: scale(1.01); }
 
-        h1 { font-size: clamp(32px, 7vw, 56px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-align: center; }
+        h1 { font-size: clamp(32px, 8vw, 64px); font-weight: 800; line-height: 1.05; margin-bottom: 20px; text-align: center; }
         h1 span { color: var(--amarelo); }
-        h2 { font-size: 28px; font-weight: 800; color: var(--amarelo); margin-bottom: 20px; text-transform: uppercase; }
-        h3 { color: var(--amarelo); font-size: 22px; margin: 0; }
+        h2 { font-size: clamp(22px, 5vw, 28px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
+        p { font-size: 17px; line-height: 1.6; opacity: 0.9; }
+
+        /* --- ÍCONES SVG --- */
+        .icon-line { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .dot { width: 10px; height: 10px; background: var(--amarelo); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 10px var(--amarelo); }
 
         .cta-button {
-            background: var(--amarelo); color: var(--preto); padding: 18px 36px; border-radius: 50px;
+            background: var(--amarelo); color: var(--preto); padding: 22px 40px; border-radius: 100px;
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer;
-            font-size: 15px; transition: 0.3s; display: inline-block; text-decoration: none;
+            font-size: 15px; transition: 0.3s; display: inline-block; width: 100%; max-width: 450px;
+            box-sizing: border-box; text-align: center;
         }
-        .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(242, 201, 76, 0.4); }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(242, 201, 76, 0.4); }
 
-        /* --- MENTORES --- */
-        .mentor-active { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
-        .mentor-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; }
-        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        /* --- MENTORES BLOQUEADOS --- */
+        .mentor-grid { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+        .mentor-img { width: 150px; height: 150px; border-radius: 30px; border: 3px solid var(--amarelo); object-fit: cover; }
+        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 11px; margin-right: 8px; text-transform: uppercase; }
 
-        .mentor-locked {
-            background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255,255,255,0.2);
-            border-radius: 28px; padding: 30px; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; opacity: 0.6; grayscale: 100%;
+        .card-locked {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
         }
+        .card-locked svg { width: 32px; height: 32px; opacity: 0.5; margin-bottom: 15px; }
+        .card-locked span { font-weight: 800; font-size: 14px; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
-        /* --- FORMULÁRIO (CONTINUIDADE) --- */
-        #form-area { display: none; flex-direction: column; align-items: center; width: 100%; padding-top: 20px; }
-        .progress-wrap { width: 260px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; }
+        /* --- FORMULÁRIO CONTINUIDADE --- */
+        #form-area { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 80vh; justify-content: center; }
+        .progress-wrap { width: 100%; max-width: 350px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 40px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; box-shadow: 0 0 15px var(--amarelo); }
         
-        .step-card { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); padding: 40px; border-radius: 32px; width: 100%; max-width: 420px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        .step-card { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(30px); padding: 40px; border-radius: 40px; width: 100%; max-width: 450px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
         .step-card.active { display: flex; animation: slideUp 0.4s ease-out; }
 
-        input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; }
+        input, textarea { width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 30px; }
         input:focus { border-bottom-color: var(--amarelo); }
-        .option-btn { padding: 12px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 14px; cursor: pointer; text-align: center; margin-bottom: 8px; transition: 0.2s; }
-        .nav-buttons { display: flex; gap: 10px; }
-        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; }
+
+        .nav-buttons { display: flex; gap: 10px; width: 100%; }
+        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 18px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; }
         .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; flex: 1; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .glass-card, .card-locked { padding: 25px; }
+            .container-main { padding: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -83,58 +122,56 @@
     <div class="container-main">
         
         <div id="lp-content">
-            <header style="text-align: center; margin-bottom: 40px;">
-                <img src="Frame 26.png" alt="Logo IpêTech" style="width: 130px; margin-bottom: 20px;">
-                <h1>Pare de imaginar e <br><span style="color:var(--amarelo)">tire seu projeto do papel.</span></h1>
+            <header class="reveal" style="text-align: center; margin-bottom: 50px;">
+                <img src="Frame 26.png" alt="Logo" style="width: 130px; margin-bottom: 25px;">
+                <h1>Pare de imaginar e <br><span>tire seu projeto do papel.</span></h1>
                 <p>No Bootcamp de Ideação, você valida suas ideias com problemas reais e constrói soluções fundamentadas em evidências de mercado.</p>
                 <button class="cta-button" onclick="goToForm()">Quero evoluir minha ideia</button>
             </header>
 
-            <section class="glass-card">
+            <section class="glass-card reveal">
                 <h2>O Problema em Primeiro Lugar</h2>
-                <p>Muitos falham por se apaixonarem pela solução antes de saber se o problema existe. Invertemos a lógica:</p>
-                <p style="margin-top:15px">• <strong>Foco na Realidade:</strong> Mapeamento de dores reais.<br>
-                • <strong>Cultura de Dados:</strong> Troque o "eu acho" por evidências.<br>
-                • <strong>Agilidade Estratégica:</strong> Validação prática com o cliente.</p>
+                <div class="icon-line"><div class="dot"></div><p><strong>Foco na Realidade:</strong> Mapeamento de dores reais do mercado.</p></div>
+                <div class="icon-line"><div class="dot"></div><p><strong>Cultura de Dados:</strong> Decisões baseadas em evidências concretas.</p></div>
+                <div class="icon-line"><div class="dot"></div><p><strong>Agilidade Estratégica:</strong> Aprendizado acelerado com feedback real.</p></div>
             </section>
 
-            <section class="glass-card">
-                <h2>Seu Kit de Ferramentas</h2>
-                <p>O que você entrega ao final da jornada:</p>
-                <p>✅ Mapa do Problema & Problem Statement.<br>
-                ✅ Persona & JTBD (Foco no Cliente).<br>
-                ✅ VPC & Lean Canvas Estratégico.<br>
-                ✅ Protótipo V2 consolidado com relatório de testes.</p>
-                <center><button class="cta-button" onclick="goToForm()" style="margin-top:15px">Iniciar minha jornada agora</button></center>
+            <section class="glass-card reveal">
+                <h2>Entregas da Jornada</h2>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Mapa do Problema & Problem Statement</p></div>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Persona & JTBD (Jobs to be Done)</p></div>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>VPC & Lean Canvas Estratégico</p></div>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Protótipo V2 + Relatório de Testes</p></div>
+                <center style="margin-top:20px"><button class="cta-button" onclick="goToForm()">Iniciar minha jornada agora</button></center>
             </section>
 
-            <h2 style="text-align:center">Corpo de Mentores</h2>
+            <h2 style="text-align:center; margin-top: 50px;">Corpo de Mentores</h2>
 
-            <section class="glass-card">
+            <section class="glass-card reveal">
                 <div class="mentor-grid">
-                    <img src="foto-decio.jpg" alt="Décio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Decio'">
-                    <div style="flex:1;">
+                    <img src="foto-decio.jpg" alt="Mentor" class="mentor-img" onerror="this.src='https://via.placeholder.com/150?text=Mentor'">
+                    <div style="flex:1; min-width: 250px;">
                         <h3>Décio Antônio Mendonça</h3>
                         <div style="margin: 10px 0;">
                             <span class="tag-highlight">Gestor Ipê Tech</span>
                             <span class="tag-highlight">Expert No-Code</span>
                         </div>
-                        <p style="font-size: 15px;">Líder de programas de inovação. Décio guiará você na condução de 10 entrevistas e 10 testes reais, transformando incertezas em dados concretos.</p>
+                        <p style="font-size: 15px;">Estrategista em inovação e transformação digital. Ele guiará você na condução de 10 entrevistas e 10 testes, traduzindo incertezas em dados objetivos.</p>
                     </div>
                 </div>
             </section>
 
-            <div class="mentor-locked" style="margin-bottom: 20px;">
-                <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
-                <p style="margin-top:10px; font-weight: 800;">MENTOR SURPRESA EM BREVE</p>
+            <div class="card-locked reveal">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+                <span>Desbloqueando em breve...</span>
             </div>
 
-            <div class="mentor-locked">
-                <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
-                <p style="margin-top:10px; font-weight: 800;">ESPECIALISTA CONVIDADO</p>
+            <div class="card-locked reveal" style="margin-top: 20px;">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+                <span>Convidado Especial</span>
             </div>
 
-            <section style="text-align: center; padding-bottom: 60px;">
+            <section class="reveal" style="text-align: center; padding: 60px 0 100px 0;">
                 <button class="cta-button" onclick="goToForm()">INSCREVA-SE E SAIA DO ZERO</button>
             </section>
         </div>
@@ -143,60 +180,60 @@
             <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
             
             <div class="step-card active" id="s1">
-                <h2>Para começarmos, qual seu nome completo?</h2>
+                <h2>Qual seu nome completo?</h2>
                 <input type="text" id="nome" placeholder="Seu nome" onkeyup="checkEnter(event, 1)">
                 <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s2">
-                <h2>Qual seu melhor e-mail?</h2>
+                <h2>Seu melhor e-mail?</h2>
                 <input type="email" id="email" placeholder="email@provedor.com" onkeyup="checkEnter(event, 2)">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(2)">Voltar</button><button class="btn-next" onclick="next(2)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s3">
-                <h2>WhatsApp?</h2>
+                <h2>Seu WhatsApp?</h2>
                 <input type="tel" id="tel" placeholder="(00) 00000-0000" maxlength="15" onkeyup="checkEnter(event, 3)">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(3)">Voltar</button><button class="btn-next" onclick="next(3)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s4">
-                <h2>Informe seu CPF</h2>
+                <h2>Informe seu CPF:</h2>
                 <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" onkeyup="checkEnter(event, 4)">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(4)">Voltar</button><button class="btn-next" onclick="next(4)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s5">
-                <h2>Qual o seu perfil?</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
-                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
-                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
-                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
+                <h2>Qual seu perfil atual?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
+                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
+                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
+                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
                 </div>
                 <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s6">
-                <h2>Expectativas para o Bootcamp?</h2>
+                <h2>Suas expectativas:</h2>
                 <textarea id="expectativas" placeholder="O que deseja alcançar?"></textarea>
                 <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s7">
-                <h2>Necessita de acessibilidade?</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
-                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
+                <h2>Acessibilidade?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <div class="option-btn a-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
+                    <div class="option-btn a-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
                 </div>
-                <input type="text" id="acesso_detalhe" placeholder="Quais?" style="display:none;">
+                <input type="text" id="acesso_detalhe" placeholder="Como ajudar?" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
             </div>
 
             <div class="step-card" id="s8">
-                <h2>Revise seus dados</h2>
-                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
+                <h2>Revise seus dados:</h2>
+                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; margin-bottom: 20px; font-size: 14px;"></div>
                 <div class="nav-buttons">
                     <button class="btn-back" onclick="back(8)">Corrigir</button>
                     <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
@@ -204,28 +241,41 @@
             </div>
 
             <div class="step-card" id="sFinal" style="text-align: center;">
-                <h2 style="color:var(--amarelo)">Sucesso!</h2>
-                <p>Verifique seu e-mail.</p>
-                <button class="cta-button" onclick="location.reload()">Sair</button>
+                <h2 style="color:var(--amarelo)">Inscrição Confirmada!</h2>
+                <p>Verifique seu e-mail para os próximos passos.</p>
+                <button class="cta-button" onclick="location.reload()">Voltar ao Início</button>
             </div>
         </div>
     </div>
 
     <script>
+        // REVEAL ON SCROLL
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+
         function goToForm() {
             document.getElementById('lp-content').style.display = 'none';
             document.getElementById('form-area').style.display = 'flex';
-            window.scrollTo(0,0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
+        // FORM LOGIC
         let form = { perfil: "", acesso: "" };
         const totalSteps = 8;
 
         function selectOpt(group, btn, val, field) {
             document.querySelectorAll('.'+group).forEach(b => {
-                b.style.background = 'transparent'; b.style.color = 'white';
+                b.style.background = 'transparent'; b.style.color = 'white'; b.style.borderColor = 'rgba(255,255,255,0.2)';
             });
-            btn.style.background = 'var(--amarelo)'; btn.style.color = 'black';
+            btn.style.background = 'var(--amarelo)'; btn.style.color = 'black'; btn.style.borderColor = 'var(--amarelo)';
             form[field] = val;
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
@@ -277,7 +327,7 @@
                 {l: 'Perfil', v: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil},
                 {l: 'Acessibilidade', v: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'}
             ];
-            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
+            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
         }
 
         async function finish() {
