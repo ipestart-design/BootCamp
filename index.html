@@ -16,12 +16,13 @@
             --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
-            --glass-bg: rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(0, 0, 0, 0.55);
             --glass-border: rgba(255, 255, 255, 0.15);
         }
         
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
+            /* FUNDO FIXO EM TODO O SITE */
             background-image: url('background.png'); 
             background-size: cover; 
             background-position: center; 
@@ -33,19 +34,20 @@
             min-height: 100vh;
         }
 
-        /* Camada de contraste fixa para o fundo nunca sumir */
         .global-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.4); z-index: -1; 
+            background: rgba(0,0,0,0.3); z-index: -1; 
         }
 
-        .container-lp { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .container-main { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
         section { padding: 30px 0; animation: fadeIn 0.8s ease-in-out; }
 
+        /* --- ESTILO GLASS (VIDRO) --- */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-radius: 28px;
             border: 1px solid var(--glass-border);
             padding: 40px;
@@ -65,24 +67,26 @@
         }
         .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(242, 201, 76, 0.5); }
 
+        /* --- MENTOR --- */
         .mentor-grid { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
-        .mentor-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; flex-shrink: 0; }
-        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        .mentor-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--amarelo); object-fit: cover; }
+        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-right: 5px; display: inline-block; }
 
-        /* --- FORM OVERLAY --- */
-        #form-wrapper { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: 1000; overflow-y: auto; 
-            align-items: center; justify-content: center; flex-direction: column; 
-            /* O fundo aqui é apenas o desfoque, a imagem vem do body */
-            backdrop-filter: blur(20px);
-            background: rgba(10, 5, 25, 0.8);
-        }
+        /* --- FORMULÁRIO (CONTINUIDADE) --- */
+        #form-area { display: none; flex-direction: column; align-items: center; width: 100%; padding-top: 20px; }
         
         .progress-wrap { width: 260px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
         .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; }
         
-        .step-card { background: rgba(0, 0, 0, 0.85); padding: 40px; border-radius: 32px; width: 90%; max-width: 420px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        /* Step Cards usam o mesmo efeito de vidro das seções */
+        .step-card { 
+            background: var(--glass-bg); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px; border-radius: 32px; width: 100%; max-width: 420px; 
+            display: none; flex-direction: column; border: 1px solid var(--glass-border); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
+        }
         .step-card.active { display: flex; animation: slideUp 0.4s ease-out; }
 
         input, textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 17px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 25px; }
@@ -99,127 +103,127 @@
 <body>
     <div class="global-overlay"></div>
 
-    <div id="lp-content" class="container-lp">
-        <header style="text-align: center; margin-bottom: 40px;">
-            <img src="Frame 26.png" alt="Logo IpêTech" style="width: 130px; margin-bottom: 20px;">
-            <h1>Pare de imaginar e <br><span style="color:var(--amarelo)">comece a validar!</span></h1>
-            <p>Aprenda a identificar dores reais do mercado, coletar evidências e prototipar com especialistas.</p>
-            <button class="cta-button" onclick="showForm()">Quero evoluir minha ideia</button>
-        </header>
+    <div class="container-main">
+        
+        <div id="lp-content">
+            <header style="text-align: center; margin-bottom: 40px;">
+                <img src="Frame 26.png" alt="Logo IpêTech" style="width: 130px; margin-bottom: 20px;">
+                <h1>Pare de imaginar e <br><span style="color:var(--amarelo)">comece a validar!</span></h1>
+                <p>Encontre um problema real para resolver e valide sua solução com dados reais.</p>
+                <button class="cta-button" onclick="goToForm()">Quero evoluir minha ideia</button>
+            </header>
 
-        <section class="glass-card">
-            <h2>Conceito: Problema Primeiro</h2>
-            <p>Muitos falham por se apaixonarem pela solução antes de entender se o problema existe no mundo real. <strong>Aqui, invertemos a lógica:</strong></p>
-            <p>• <strong>Foco na Realidade:</strong> Mapeamento de dores e evidências.<br>
-            • <strong>Decisões Baseadas em Dados:</strong> Menos suposições, mais mercado.<br>
-            • <strong>Aprendizado Acelerado:</strong> Validação direta com o cliente.</p>
-        </section>
+            <section class="glass-card">
+                <h2>Conceito: Problema Primeiro</h2>
+                <p>Muitos falham por se apaixonarem pela solução antes de entender se o problema existe. <strong>Invertemos a lógica:</strong></p>
+                <p style="margin-top:15px">• <strong>Foco na Realidade:</strong> Mapeamento de dores reais.<br>
+                • <strong>Decisões Baseadas em Dados:</strong> Menos "eu acho", mais mercado.<br>
+                • <strong>Aprendizado Acelerado:</strong> Validação prática.</p>
+            </section>
 
-        <section class="glass-card">
-            <h2>Entregas da Jornada</h2>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 12px;">✅ <strong>Mapa do Problema:</strong> Clareza sobre o desafio escolhido.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Persona & JTBD:</strong> Entendimento profundo do cliente.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>VPC & Lean Canvas:</strong> Desenho estratégico da proposta.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Protótipo V2:</strong> Materialização testada com feedbacks.</li>
-            </ul>
-            <center><button class="cta-button" onclick="showForm()" style="margin-top: 15px;">Iniciar minha jornada</button></center>
-        </section>
+            <section class="glass-card">
+                <h2>Entregas</h2>
+                <p>✅ Mapa do Problema & Problem Statement<br>
+                ✅ Persona & JTBD (Entendimento do cliente)<br>
+                ✅ VPC & Lean Canvas (Estratégia)<br>
+                ✅ Protótipo V2 + Relatório de Testes</p>
+                <center><button class="cta-button" onclick="goToForm()" style="margin-top:15px">Iniciar minha jornada</button></center>
+            </section>
 
-        <section class="glass-card">
-            <h2>O Mentor</h2>
-            <div class="mentor-grid">
-                <img src="foto-decio.jpg" alt="Décio Antônio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Decio'">
-                <div style="flex:1;">
-                    <h3>Décio Antônio Mendonça</h3>
-                    <span class="tag-highlight">Gestor de Inovação</span><span class="tag-highlight">Estrategista</span><span class="tag-highlight">Especialista No-Code</span>
-                    <p style="font-size: 15px; margin-top: 10px;">Líder de programas de inovação no <strong>Ipê Tech</strong> e especialista em transformação digital. Décio guiará você na realização de <strong>10 entrevistas e 10 testes</strong>, traduzindo incertezas em decisões baseadas em dados reais.</p>
+            <section class="glass-card">
+                <div class="mentor-grid">
+                    <img src="foto-decio.jpg" alt="Décio Antônio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Decio'">
+                    <div style="flex:1;">
+                        <h3>Décio Antônio Mendonça</h3>
+                        <span class="tag-highlight">Gestor Ipê Tech</span><span class="tag-highlight">Estrategista Digital</span>
+                        <p style="font-size: 15px; margin-top: 10px;">Líder de programas de inovação e transformação digital. Ele guiará você na realização de <strong>10 entrevistas e 10 testes</strong>, traduzindo incertezas em critérios objetivos de validação.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="text-align: center; padding-bottom: 60px;">
+                <button class="cta-button" onclick="goToForm()">INSCREVA-SE E SAIA DO ZERO</button>
+            </section>
+        </div>
+
+        <div id="form-area">
+            <img src="Frame 26.png" alt="Logo" style="width: 80px; margin-bottom: 20px;">
+            <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+            
+            <div class="step-card active" id="s1">
+                <h2>Qual seu nome completo?</h2>
+                <input type="text" id="nome" placeholder="Seu nome" onkeyup="checkEnter(event, 1)">
+                <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s2">
+                <h2>Seu melhor e-mail?</h2>
+                <input type="email" id="email" placeholder="email@provedor.com" onkeyup="checkEnter(event, 2)">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(2)">Voltar</button><button class="btn-next" onclick="next(2)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s3">
+                <h2>WhatsApp?</h2>
+                <input type="tel" id="tel" placeholder="(00) 00000-0000" maxlength="15" onkeyup="checkEnter(event, 3)">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(3)">Voltar</button><button class="btn-next" onclick="next(3)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s4">
+                <h2>Informe seu CPF</h2>
+                <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" onkeyup="checkEnter(event, 4)">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(4)">Voltar</button><button class="btn-next" onclick="next(4)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s5">
+                <h2>Qual o seu perfil?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
+                </div>
+                <input type="text" id="perfil_outro" placeholder="Especifique" style="display:none;">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s6">
+                <h2>Expectativas para o Bootcamp?</h2>
+                <textarea id="expectativas" placeholder="O que você espera aprender?"></textarea>
+                <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s7">
+                <h2>Necessita de acessibilidade?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
+                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
+                </div>
+                <input type="text" id="acesso_detalhe" placeholder="Quais?" style="display:none;">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
+            </div>
+
+            <div class="step-card" id="s8">
+                <h2>Revise seus dados</h2>
+                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
+                <div class="nav-buttons">
+                    <button class="btn-back" onclick="back(8)">Corrigir</button>
+                    <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
                 </div>
             </div>
-        </section>
 
-        <section style="text-align: center; padding-bottom: 60px;">
-            <h2>O Caminho para o Sucesso</h2>
-            <p>Este é o seu primeiro passo para o MVP e Tração. Pare de imaginar!</p>
-            <button class="cta-button" onclick="showForm()">INSCREVA-SE E SAIA DO ZERO</button>
-        </section>
-    </div>
-
-    <div id="form-wrapper">
-        <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
-        
-        <div class="step-card active" id="s1">
-            <h2>Qual seu nome completo?</h2>
-            <input type="text" id="nome" placeholder="Seu nome" onkeyup="checkEnter(event, 1)">
-            <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s2">
-            <h2>Seu melhor e-mail?</h2>
-            <input type="email" id="email" placeholder="email@provedor.com" onkeyup="checkEnter(event, 2)">
-            <div class="nav-buttons"><button class="btn-back" onclick="back(2)">Voltar</button><button class="btn-next" onclick="next(2)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s3">
-            <h2>WhatsApp?</h2>
-            <input type="tel" id="tel" placeholder="(00) 00000-0000" maxlength="15" onkeyup="checkEnter(event, 3)">
-            <div class="nav-buttons"><button class="btn-back" onclick="back(3)">Voltar</button><button class="btn-next" onclick="next(3)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s4">
-            <h2>Informe seu CPF</h2>
-            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" onkeyup="checkEnter(event, 4)">
-            <div class="nav-buttons"><button class="btn-back" onclick="back(4)">Voltar</button><button class="btn-next" onclick="next(4)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s5">
-            <h2>Qual o seu perfil?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
-                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
-                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
-                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
-                <div class="option-btn p-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
+            <div class="step-card" id="sFinal" style="text-align: center;">
+                <h2 style="color:var(--amarelo)">Sucesso!</h2>
+                <p>Sua inscrição foi enviada.</p>
+                <button class="cta-button" onclick="location.reload()" style="margin-top:15px">Sair</button>
             </div>
-            <input type="text" id="perfil_outro" placeholder="Especifique" style="display:none;">
-            <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s6">
-            <h2>Suas expectativas?</h2>
-            <textarea id="expectativas" placeholder="O que espera aprender?"></textarea>
-            <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
-        </div>
-
-        <div class="step-card" id="s7">
-            <h2>Acessibilidade?</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
-                <div class="option-btn a-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
-                <div class="option-btn a-opt" style="border: 1px solid #444; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
-            </div>
-            <input type="text" id="acesso_detalhe" placeholder="Quais?" style="display:none;">
-            <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
-        </div>
-
-        <div class="step-card" id="s8">
-            <h2>Revise seus dados</h2>
-            <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;"></div>
-            <div class="nav-buttons">
-                <button class="btn-back" onclick="back(8)">Corrigir</button>
-                <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
-            </div>
-        </div>
-
-        <div class="step-card" id="sFinal" style="text-align: center;">
-            <h2 style="color:var(--amarelo)">Sucesso!</h2>
-            <p>Inscrição realizada. Verifique seu e-mail.</p>
-            <button class="cta-button" onclick="location.reload()">Voltar</button>
         </div>
     </div>
 
     <script>
-        function showForm() {
+        // TRANSIÇÃO DE CONTINUIDADE
+        function goToForm() {
             document.getElementById('lp-content').style.display = 'none';
-            document.getElementById('form-wrapper').style.display = 'flex';
+            document.getElementById('form-area').style.display = 'flex';
             window.scrollTo(0,0);
         }
 
@@ -228,11 +232,9 @@
 
         function selectOpt(group, btn, val, field) {
             document.querySelectorAll('.'+group).forEach(b => {
-                b.style.background = 'transparent';
-                b.style.color = 'white';
+                b.style.background = 'transparent'; b.style.color = 'white'; b.style.fontWeight = '400';
             });
-            btn.style.background = 'var(--amarelo)';
-            btn.style.color = 'black';
+            btn.style.background = 'var(--amarelo)'; btn.style.color = 'black'; btn.style.fontWeight = '800';
             form[field] = val;
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
@@ -288,7 +290,7 @@
                 {l: 'Perfil', v: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil},
                 {l: 'Acessibilidade', v: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'}
             ];
-            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
+            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
         }
 
         async function finish() {
