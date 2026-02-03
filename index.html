@@ -16,7 +16,7 @@
             --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
-            --glass-bg: rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(0, 0, 0, 0.65);
             --glass-border: rgba(255, 255, 255, 0.15);
         }
         
@@ -31,75 +31,70 @@
 
         .global-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.4); z-index: -1; 
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%); z-index: -1; 
         }
 
         .container-main { width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
         
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 28px;
+            border-radius: 30px;
             border: 1px solid var(--glass-border);
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             margin: 30px 0;
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
 
-        h1 { font-size: clamp(32px, 9vw, 64px); font-weight: 800; line-height: 1.05; margin-bottom: 20px; text-align: center; }
-        h1 span { color: var(--amarelo); }
+        h1 { font-size: clamp(32px, 9vw, 68px); font-weight: 800; line-height: 1.0; margin-bottom: 25px; text-align: center; }
+        h1 span { color: var(--amarelo); text-shadow: 0 0 25px rgba(242, 201, 76, 0.3); }
         h2 { font-size: clamp(24px, 6vw, 32px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
-        h3 { color: var(--amarelo); font-size: 22px; margin: 0 0 10px 0; }
-        p { font-size: 18px; line-height: 1.6; opacity: 0.9; }
 
-        /* ÍCONES SVG NO LUGAR DE EMOJIS */
-        .icon-row { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
-        .icon-circle { 
-            width: 36px; height: 36px; background: var(--amarelo); border-radius: 8px; 
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        /* --- SISTEMA DE ABAS MENTORES --- */
+        .tabs-container { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
+        .tab-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;
+            padding: 12px 24px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s;
         }
-        .icon-circle svg { width: 20px; height: 20px; fill: var(--preto); }
+        .tab-btn.active { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
+        .tab-btn.locked { opacity: 0.5; cursor: not-allowed; display: flex; align-items: center; gap: 8px; }
+
+        .mentor-content { display: none; }
+        .mentor-content.active { display: block; animation: fadeIn 0.5s ease; }
+
+        .mentor-grid { display: flex; align-items: center; gap: 35px; flex-wrap: wrap; justify-content: center; }
+        .mentor-img { width: 160px; height: 160px; border-radius: 30px; border: 3px solid var(--amarelo); object-fit: cover; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .tag-item { background: var(--amarelo); color: var(--preto); padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 11px; text-transform: uppercase; }
+
+        /* --- ICONS & BUTTONS --- */
+        .icon-box { width: 50px; height: 50px; background: var(--amarelo); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+        .icon-box svg { width: 26px; height: 26px; fill: var(--preto); }
 
         .cta-button {
-            background: var(--amarelo); color: var(--preto); padding: 22px 40px; border-radius: 100px;
+            background: var(--amarelo); color: var(--preto); padding: 22px 45px; border-radius: 100px;
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer;
-            font-size: 15px; transition: 0.3s; display: inline-block; text-decoration: none; width: 100%; max-width: 450px;
-            box-sizing: border-box; text-align: center;
+            font-size: 16px; transition: 0.4s; display: inline-block; width: 100%; max-width: 450px; text-align: center;
         }
-        .cta-button:hover { transform: scale(1.03); box-shadow: 0 10px 30px rgba(242, 201, 76, 0.4); }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(242, 201, 76, 0.5); }
 
-        /* MENTOR TAGS SEPARADAS */
-        .mentor-grid { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center; }
-        .mentor-img { width: 180px; height: 180px; border-radius: 30px; border: 4px solid var(--amarelo); object-fit: cover; }
-        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
-        .tag-highlight { background: var(--amarelo); color: var(--preto); padding: 6px 14px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; }
-
-        /* FORMULÁRIO CONTINUIDADE */
-        #form-area { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 80vh; justify-content: center; }
+        /* --- FORM AREA --- */
+        #form-area { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 85vh; justify-content: center; }
         .progress-wrap { width: 100%; max-width: 350px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 40px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.6s ease; }
-        
-        .step-card { background: rgba(0, 0, 0, 0.85); padding: 40px; border-radius: 40px; width: 100%; max-width: 450px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
-        .step-card.active { display: flex; animation: slideUp 0.4s ease-out; }
+        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.8s ease; }
+        .step-card { background: rgba(0, 0, 0, 0.9); padding: 40px; border-radius: 40px; width: 100%; max-width: 450px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
+        .step-card.active { display: flex; animation: slideUp 0.6s ease-out; }
 
-        input, textarea { width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 18px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 30px; }
-        input:focus { border-bottom-color: var(--amarelo); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
-        .nav-buttons { display: flex; gap: 10px; width: 100%; }
-        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 16px; border-radius: 14px; font-weight: 800; flex: 2; cursor: pointer; }
-        .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; flex: 1; cursor: pointer; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 600px) {
-            .glass-card { padding: 25px; }
-            .container-main { padding: 10px; }
-        }
+        @media (max-width: 600px) { .glass-card { padding: 25px; } .mentor-img { width: 120px; height: 120px; } }
     </style>
 </head>
 <body>
@@ -108,63 +103,55 @@
     <div class="container-main">
         
         <div id="lp-content">
-            <header class="reveal" style="text-align: center; margin-bottom: 50px;">
-                <img src="Frame 26.png" alt="Logo" style="width: 140px; margin-bottom: 25px;">
+            <header class="reveal" style="text-align: center; margin-bottom: 60px;">
+                <img src="Frame 26.png" alt="IpêTech" style="width: 150px; margin-bottom: 30px;">
                 <h1>Pare de imaginar e <br><span>tire seu projeto do papel.</span></h1>
-                <p>No Bootcamp de Ideação, você valida suas ideias com problemas reais e constrói soluções fundamentadas em evidências de mercado.</p>
+                <p>O <strong>Bootcamp de Ideação</strong> é onde ideias se tornam negócios validados. Identifique dores e construa soluções com base em evidências.</p>
                 <button class="cta-button" onclick="goToForm()">Quero evoluir minha ideia</button>
             </header>
 
             <section class="glass-card reveal">
+                <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
                 <h2>Problema Primeiro</h2>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
-                    <p><strong>Foco na Realidade:</strong> Mapeamento de dores reais e busca por evidências concretas.</p>
-                </div>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></div>
-                    <p><strong>Decisões em Dados:</strong> Substituímos suposições por dados reais e métricas de mercado.</p>
-                </div>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg></div>
-                    <p><strong>Aprendizado Consciente:</strong> Validação da dor e abertura do cliente para inovação.</p>
-                </div>
+                <p>Invertemos a lógica para garantir mercado real:</p>
+                <p style="margin-top:20px">• <strong>Mapeamento:</strong> Dores que valem a pena resolver.<br>
+                • <strong>Evidências:</strong> Dados reais no lugar de suposições.<br>
+                • <strong>Agilidade:</strong> Validação prática com o cliente final.</p>
             </section>
 
             <section class="glass-card reveal">
-                <h2>Entregas da Jornada</h2>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                    <p><strong>Mapa do Problema:</strong> Clareza total sobre o desafio a ser resolvido.</p>
+                <h2>Corpo de Mentores</h2>
+                
+                <div class="tabs-container">
+                    <button class="tab-btn active" onclick="openMentor(event, 'mentor1')">Décio Antônio</button>
+                    <button class="tab-btn locked">
+                        <svg style="width:14px; height:14px; fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+                        Revelar em breve
+                    </button>
+                    <button class="tab-btn locked">
+                        <svg style="width:14px; height:14px; fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+                        Surpresa
+                    </button>
                 </div>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                    <p><strong>Estratégia:</strong> VPC e Lean Canvas prontos para execução.</p>
-                </div>
-                <div class="icon-row">
-                    <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                    <p><strong>Validação:</strong> Protótipo V2 e Relatório detalhado de testes.</p>
-                </div>
-                <center style="margin-top:30px"><button class="cta-button" onclick="goToForm()">Iniciar minha jornada agora</button></center>
-            </section>
 
-            <section class="glass-card reveal">
-                <div class="mentor-grid">
-                    <img src="foto-decio.jpg" alt="Décio" class="mentor-img" onerror="this.src='https://via.placeholder.com/180?text=Decio'">
-                    <div style="flex:1; min-width: 280px;">
-                        <h3>Seu Mentor: Décio Antônio</h3>
-                        <div class="tag-container">
-                            <span class="tag-highlight">Gestor Ipê Tech</span>
-                            <span class="tag-highlight">Expert No-Code</span>
-                            <span class="tag-highlight">Estrategista Digital</span>
+                <div id="mentor1" class="mentor-content active">
+                    <div class="mentor-grid">
+                        <img src="foto-decio.jpg" alt="Décio" class="mentor-img" onerror="this.src='https://via.placeholder.com/160?text=Décio'">
+                        <div style="flex:1; min-width: 250px;">
+                            <h3>Décio Antônio Mendonça</h3>
+                            <div class="tag-container">
+                                <span class="tag-item">Gestor Ipê Tech</span>
+                                <span class="tag-item">Expert No-Code</span>
+                                <span class="tag-item">IA Aplicada</span>
+                            </div>
+                            <p style="font-size: 15px;">Líder de inovação e estratégia. Ele guiará você na realização de <strong>10 entrevistas e 10 testes</strong>, traduzindo incertezas em decisões baseadas em dados.</p>
                         </div>
-                        <p style="font-size: 16px;">Líder de inovação e transformação digital. Ele guiará você na realização de <strong>10 entrevistas e 10 testes reais</strong>, convertendo incertezas em uma proposta de valor imbatível.</p>
                     </div>
                 </div>
             </section>
 
-            <section class="reveal" style="text-align: center; padding-bottom: 100px;">
-                <button class="cta-button" onclick="goToForm()">INSCREVA-SE E SAIA DO ZERO COM UM PROJETO REAL</button>
+            <section class="reveal" style="text-align: center; padding: 40px 0 100px 0;">
+                <button class="cta-button" onclick="goToForm()">INSCREVA-SE AGORA</button>
             </section>
         </div>
 
@@ -209,7 +196,7 @@
 
             <div class="step-card" id="s6">
                 <h2>Suas expectativas:</h2>
-                <textarea id="expectativas" placeholder="O que espera alcançar?"></textarea>
+                <textarea id="expectativas" placeholder="O que deseja alcançar?"></textarea>
                 <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
             </div>
 
@@ -224,8 +211,8 @@
             </div>
 
             <div class="step-card" id="s8">
-                <h2>Confirme seus dados:</h2>
-                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 20px; font-size: 15px;"></div>
+                <h2>Revise seus dados:</h2>
+                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; font-size: 14px;"></div>
                 <div class="nav-buttons">
                     <button class="btn-back" onclick="back(8)">Corrigir</button>
                     <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
@@ -233,14 +220,25 @@
             </div>
 
             <div class="step-card" id="sFinal" style="text-align: center;">
-                <h2 style="color:var(--amarelo)">Sucesso!</h2>
-                <p>Verifique seu e-mail para os próximos passos.</p>
+                <h2 style="color:var(--amarelo)">Inscrição Realizada!</h2>
+                <p>Verifique seu e-mail.</p>
                 <button class="cta-button" onclick="location.reload()" style="margin-top:20px">Sair</button>
             </div>
         </div>
     </div>
 
     <script>
+        // LÓGICA DAS ABAS
+        function openMentor(evt, mentorId) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("mentor-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+            document.getElementById(mentorId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
         // REVEAL ON SCROLL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -259,7 +257,7 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // FORM LOGIC
+        // FORM LOGIC (Mantida do anterior)
         let form = { perfil: "", acesso: "" };
         const totalSteps = 8;
 
@@ -292,15 +290,11 @@
             if(step === 6 && document.getElementById('expectativas').value.length < 2) return;
             if(step === 7 && !form.acesso) return;
             if(step === 7) renderReview();
-
             document.getElementById('s' + step).classList.remove('active');
             setTimeout(() => {
                 document.getElementById('s' + step).style.display = 'none';
                 const n = document.getElementById('s' + (step + 1));
-                if(n) {
-                    n.style.display = 'flex'; n.classList.add('active');
-                    document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%';
-                }
+                if(n) { n.style.display = 'flex'; n.classList.add('active'); document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%'; }
             }, 50);
         }
 
@@ -323,7 +317,7 @@
                 {l: 'Perfil', v: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil},
                 {l: 'Acessibilidade', v: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'}
             ];
-            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
+            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
         }
 
         async function finish() {
