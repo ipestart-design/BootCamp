@@ -16,7 +16,7 @@
             --roxo: #7B5DFF; 
             --preto: #000000; 
             --branco: #FFFFFF; 
-            --glass-bg: rgba(0, 0, 0, 0.75);
+            --glass-bg: rgba(0, 0, 0, 0.65);
             --glass-border: rgba(255, 255, 255, 0.15);
         }
         
@@ -36,7 +36,7 @@
 
         .container-main { width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
         
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s ease; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .glass-card {
@@ -50,58 +50,116 @@
             margin: 30px 0;
             transition: all 0.4s ease;
         }
+        .glass-card:hover { border-color: var(--amarelo); transform: translateY(-5px); }
 
         h1 { font-size: clamp(32px, 9vw, 68px); font-weight: 800; line-height: 1.0; margin-bottom: 25px; text-align: center; }
-        h1 span { color: var(--amarelo); }
-        h2 { font-size: clamp(20px, 5vw, 28px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
+        h1 span { color: var(--amarelo); text-shadow: 0 0 25px rgba(242, 201, 76, 0.3); }
+        h2 { font-size: clamp(24px, 6vw, 32px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
         p { font-size: 18px; line-height: 1.6; opacity: 0.9; }
+
+        .icon-line { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .dot { width: 10px; height: 10px; background: var(--amarelo); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 10px var(--amarelo); }
 
         .cta-button {
             background: var(--amarelo); color: var(--preto); padding: 22px 45px; border-radius: 100px;
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer;
-            font-size: 16px; transition: 0.4s; display: inline-block; text-decoration: none; width: 100%; max-width: 450px;
-            text-align: center; letter-spacing: 1.5px;
+            font-size: 16px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: inline-block; text-decoration: none; width: 100%; max-width: 450px;
+            box-sizing: border-box; text-align: center; letter-spacing: 1.5px;
         }
-        .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(242, 201, 76, 0.4); }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(242, 201, 76, 0.5); }
+
+        .mentor-grid { display: flex; align-items: center; gap: 35px; flex-wrap: wrap; justify-content: center; }
+        .mentor-img { width: 180px; height: 180px; border-radius: 40px; border: 4px solid var(--amarelo); object-fit: cover; transition: 0.5s; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .tag-item { background: var(--amarelo); color: var(--preto); padding: 6px 15px; border-radius: 8px; font-weight: 800; font-size: 11px; }
+
+        .card-locked {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px; padding: 40px; text-align: center; display: flex;
+            flex-direction: column; align-items: center; justify-content: center; min-height: 150px; opacity: 0.7; margin-top: 20px;
+        }
 
         /* FORMULÁRIO */
         #form-area { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 85vh; justify-content: center; }
-        .progress-wrap { width: 100%; max-width: 350px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 40px; }
-        .progress-bar { height: 100%; width: 11%; background: var(--amarelo); transition: 0.8s; border-radius: 20px; box-shadow: 0 0 20px var(--amarelo); }
+        .progress-wrap { width: 100%; max-width: 350px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 40px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 11.1%; background: var(--amarelo); transition: width 0.8s ease; box-shadow: 0 0 20px var(--amarelo); }
         
-        .step-card { background: rgba(0, 0, 0, 0.95); padding: 40px; border-radius: 40px; width: 100%; max-width: 480px; display: none; flex-direction: column; border: 1px solid var(--glass-border); }
-        .step-card.active { display: flex; animation: slideUp 0.5s ease-out; }
+        .step-card { background: rgba(0, 0, 0, 0.9); padding: 45px; border-radius: 40px; width: 100%; max-width: 450px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
+        .step-card.active { display: flex; animation: slideUp 0.6s ease-out; }
 
-        input, textarea { width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 18px; background: transparent; color: #fff; outline: none; margin-bottom: 30px; font-family: 'Manrope'; }
+        input, textarea { width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 18px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 30px; }
         input:focus { border-bottom-color: var(--amarelo); }
 
-        .option-btn { border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 15px; cursor: pointer; text-align: center; transition: 0.3s; font-weight: 600; }
+        .option-btn { border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center; transition: 0.3s; }
         .option-btn.selected { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
 
-        .nav-buttons { display: flex; gap: 12px; margin-top: 10px; }
+        .nav-buttons { display: flex; gap: 12px; width: 100%; }
         .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 18px; border-radius: 18px; font-weight: 800; flex: 2; cursor: pointer; text-transform: uppercase; }
-        .btn-back { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 18px; flex: 1; cursor: pointer; }
+        .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 18px; flex: 1; cursor: pointer; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="global-overlay"></div>
 
     <div class="container-main">
+        
         <div id="lp-content">
-            <header class="reveal active" style="text-align: center; margin-bottom: 60px; margin-top: 40px;">
-                <img src="Frame 26.png" style="width: 150px; margin-bottom: 30px;">
+            <header class="reveal" style="text-align: center; margin-bottom: 60px;">
+                <img src="Frame 26.png" alt="IpêTech" style="width: 150px; margin-bottom: 30px;">
                 <h1>Pare de imaginar e <br><span>tire seu projeto do papel.</span></h1>
-                <p>No Bootcamp de Ideação, você valida suas ideias com problemas reais e constrói soluções fundamentadas.</p>
+                <p>No Bootcamp de Ideação, você valida suas ideias com problemas reais e constrói soluções fundamentadas em evidências de mercado.</p>
                 <button class="cta-button" onclick="goToForm()">Quero evoluir minha ideia</button>
             </header>
 
             <section class="glass-card reveal">
                 <h2>O Problema em Primeiro Lugar</h2>
-                <p><strong>Mapeamento:</strong> Dores que as pessoas pagariam para resolver.</p>
-                <p><strong>Evidências:</strong> Substitua o "eu acho" por métricas e validações.</p>
-                <center style="margin-top:20px"><button class="cta-button" onclick="goToForm()">Iniciar Jornada</button></center>
+                <div class="icon-line"><div class="dot"></div><p><strong>Mapeamento:</strong> Dores que as pessoas pagariam para resolver.</p></div>
+                <div class="icon-line"><div class="dot"></div><p><strong>Evidências:</strong> Substitua o "eu acho" por métricas e validações.</p></div>
+                <div class="icon-line"><div class="dot"></div><p><strong>Agilidade:</strong> Aprenda a pivotar rápido com base em dados.</p></div>
+            </section>
+
+            <section class="glass-card reveal">
+                <h2>Suas Entregas</h2>
+                <p>O que você terá em mãos ao final da jornada:</p>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Mapa do Problema & Problem Statement</p></div>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>VPC & Lean Canvas Estratégico</p></div>
+                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Protótipo V2 e Relatório de Testes</p></div>
+                <center style="margin-top:30px"><button class="cta-button" onclick="goToForm()">Iniciar minha jornada</button></center>
+            </section>
+
+            <h2 style="text-align:center; margin-top: 50px;">Corpo de Mentores</h2>
+
+            <section class="glass-card reveal">
+                <div class="mentor-grid">
+                    <img src="foto-decio.jpg" alt="Décio" class="mentor-img" onerror="this.src='https://via.placeholder.com/180?text=Décio'">
+                    <div style="flex:1; min-width: 280px;">
+                        <h3>Décio Antônio Mendonça</h3>
+                        <div class="tag-container">
+                            <span class="tag-item">Gestor Ipê Tech</span>
+                            <span class="tag-item">Expert No-Code</span>
+                            <span class="tag-item">Estrategista Digital</span>
+                        </div>
+                        <p style="font-size: 16px;">Líder de inovação no <strong>Ipê Tech</strong>. Décio guiará você na realização de 10 entrevistas e 10 testes práticos para traduzir incertezas em decisões seguras.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="card-locked reveal">
+                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+                <span>REVELAR EM BREVE...</span>
+            </div>
+
+            <div class="card-locked reveal">
+                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+                <span>CONVIDADO ESPECIAL</span>
+            </div>
+
+            <section class="reveal" style="text-align: center; padding: 60px 0 100px 0;">
+                <button class="cta-button" onclick="goToForm()">INSCREVA-SE E SAIA DO ZERO</button>
             </section>
         </div>
 
@@ -110,7 +168,7 @@
             
             <div class="step-card active" id="s1">
                 <h2>Qual seu nome completo?</h2>
-                <input type="text" id="nome" placeholder="Nome completo" onkeyup="checkEnter(event, 1)">
+                <input type="text" id="nome" placeholder="Seu nome" onkeyup="checkEnter(event, 1)">
                 <div class="nav-buttons"><button class="btn-next" onclick="next(1)">Próximo</button></div>
             </div>
 
@@ -128,26 +186,26 @@
 
             <div class="step-card" id="s4">
                 <h2>Informe seu CPF:</h2>
-                <p style="font-size: 13px; opacity: 0.6; margin-bottom: 10px;">Para emissão do certificado oficial.</p>
+                <p style="font-size: 14px; opacity: 0.7; margin-bottom: 10px;">(Para a emissão do certificado oficial)</p>
                 <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(4)">Voltar</button><button class="btn-next" onclick="next(4)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s5">
                 <h2>Qual seu perfil?</h2>
-                <p style="font-size: 12px; opacity: 0.5; margin-bottom: 15px;">(Pode marcar mais de um)</p>
+                <p style="font-size: 12px; opacity: 0.5; margin-bottom: 10px;">(Selecione todos que se aplicam)</p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
                     <div class="option-btn p-opt" onclick="toggleMulti(this, 'ALUNO')">Aluno</div>
                     <div class="option-btn p-opt" onclick="toggleMulti(this, 'PROFESSOR')">Professor</div>
                     <div class="option-btn p-opt" onclick="toggleMulti(this, 'EMPREENDEDOR')">Empreendedor</div>
                     <div class="option-btn p-opt" onclick="toggleMulti(this, 'Outros')">Outros</div>
                 </div>
-                <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none;">
+                <input type="text" id="perfil_outro" placeholder="Especifique" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s6">
-                <h2>Como soube do evento?</h2>
+                <h2>Por onde soube do evento?</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
                     <div class="option-btn m-opt" onclick="selectSingle('m-opt', this, 'Instagram Ipetech', 'midia')">Instagram Ipetech</div>
                     <div class="option-btn m-opt" onclick="selectSingle('m-opt', this, 'Pacto de Lavras', 'midia')">Pacto de Lavras</div>
@@ -155,13 +213,13 @@
                     <div class="option-btn m-opt" onclick="selectSingle('m-opt', this, 'Parceiros', 'midia')">Parceiros</div>
                     <div class="option-btn m-opt" style="grid-column: span 2;" onclick="selectSingle('m-opt', this, 'Outras', 'midia')">Outras</div>
                 </div>
-                <input type="text" id="midia_outro" placeholder="Qual parceiro ou mídia?" style="display:none;">
+                <input type="text" id="midia_outro" placeholder="Especifique" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s7">
                 <h2>Suas expectativas:</h2>
-                <textarea id="expectativas" placeholder="O que deseja alcançar no bootcamp?" style="height: 100px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 15px;"></textarea>
+                <textarea id="expectativas" placeholder="O que deseja alcançar?"></textarea>
                 <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Próximo</button></div>
             </div>
 
@@ -171,39 +229,51 @@
                     <div class="option-btn a-opt" onclick="selectSingle('a-opt', this, 'Não', 'acesso')">Não</div>
                     <div class="option-btn a-opt" onclick="selectSingle('a-opt', this, 'Sim', 'acesso')">Sim</div>
                 </div>
-                <input type="text" id="acesso_detalhe" placeholder="Como podemos ajudar?" style="display:none;">
+                <input type="text" id="acesso_detalhe" placeholder="Como ajudar?" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Voltar</button><button class="btn-next" onclick="next(8)">Revisar</button></div>
             </div>
 
             <div class="step-card" id="s9">
                 <h2>Confirme seus dados:</h2>
-                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; font-size: 14px;"></div>
+                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; font-size: 15px;"></div>
                 <div class="nav-buttons">
                     <button class="btn-back" onclick="back(9)">Corrigir</button>
-                    <button class="btn-next" id="confirm-btn" onclick="finish()">Finalizar Inscrição</button>
+                    <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
                 </div>
             </div>
 
             <div class="step-card" id="sFinal" style="text-align: center;">
-                <h2 style="color:var(--amarelo)">Sucesso!</h2>
-                <p>Sua inscrição foi confirmada. Verifique seu e-mail!</p>
+                <h2 style="color:var(--amarelo)">Inscrição Realizada!</h2>
+                <p>Verifique seu e-mail.</p>
                 <button class="cta-button" onclick="location.reload()" style="margin-top:20px">Sair</button>
             </div>
         </div>
     </div>
 
     <script>
-        let form = { midia: "", acesso: "" };
-        let perfisSelecionados = [];
-        const totalSteps = 9;
+        // Animação de Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
 
         function goToForm() {
             document.getElementById('lp-content').style.display = 'none';
             document.getElementById('form-area').style.display = 'flex';
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
 
-        // Múltipla Escolha (Perfis)
+        let form = { midia: "", acesso: "" };
+        let perfisSelecionados = [];
+        const totalSteps = 9;
+
+        // Lógica de Múltipla Escolha (Perfis)
         function toggleMulti(btn, val) {
             if (perfisSelecionados.includes(val)) {
                 perfisSelecionados = perfisSelecionados.filter(i => i !== val);
@@ -215,7 +285,7 @@
             document.getElementById('perfil_outro').style.display = perfisSelecionados.includes('Outros') ? 'block' : 'none';
         }
 
-        // Escolha Única (Mídia e Acessibilidade)
+        // Lógica de Escolha Única (Mídia e Acesso)
         function selectSingle(group, btn, val, field) {
             document.querySelectorAll('.'+group).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
@@ -224,7 +294,7 @@
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
-        // Máscaras e Enter
+        // Máscaras
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
@@ -233,38 +303,45 @@
             let v = e.target.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
             e.target.value = v;
         });
-        function checkEnter(e, s) { if(e.key === "Enter") next(s); }
 
-        function next(s) {
-            if(s === 5 && perfisSelecionados.length === 0) return;
-            document.getElementById('s'+s).style.display = 'none';
-            const n = document.getElementById('s'+(s+1));
-            if(n) { n.style.display = 'flex'; n.classList.add('active'); }
-            document.getElementById('bar').style.width = ((s+1)/totalSteps)*100 + '%';
-            if(s === 8) renderReview();
+        function checkEnter(e, step) { if(e.key === "Enter") next(step); }
+
+        function next(step) {
+            if(step <= 4 && document.getElementById(['nome','email','tel','cpf'][step-1]).value.length < 3) return;
+            if(step === 5 && perfisSelecionados.length === 0) return;
+            if(step === 6 && !form.midia) return;
+            if(step === 7 && document.getElementById('expectativas').value.length < 2) return;
+            if(step === 8 && !form.acesso) return;
+            
+            if(step === 8) renderReview();
+            
+            document.getElementById('s' + step).style.display = 'none';
+            const nextStep = document.getElementById('s' + (step + 1));
+            nextStep.style.display = 'flex';
+            nextStep.classList.add('active');
+            document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%';
         }
 
-        function back(s) {
-            document.getElementById('s'+s).style.display = 'none';
-            document.getElementById('s'+(s-1)).style.display = 'flex';
-            document.getElementById('bar').style.width = ((s-1)/totalSteps)*100 + '%';
+        function back(step) {
+            document.getElementById('s' + step).style.display = 'none';
+            const prevStep = document.getElementById('s' + (step - 1));
+            prevStep.style.display = 'flex';
+            prevStep.classList.add('active');
+            document.getElementById('bar').style.width = ((step - 1) / totalSteps) * 100 + '%';
         }
 
         function renderReview() {
-            const perfilFinal = perfisSelecionados.join(', ');
-            const midiaFinal = (form.midia === 'Outras' || form.midia === 'Parceiros') ? document.getElementById('midia_outro').value : form.midia;
-            const content = `
-                <p><strong>Nome:</strong> ${document.getElementById('nome').value}</p>
-                <p><strong>WhatsApp:</strong> ${document.getElementById('tel').value}</p>
-                <p><strong>Perfis:</strong> ${perfilFinal}</p>
-                <p><strong>Como soube:</strong> ${midiaFinal}</p>
-            `;
-            document.getElementById('review-content').innerHTML = content;
+            const data = [
+                {l: 'Nome', v: document.getElementById('nome').value},
+                {l: 'Perfis', v: perfisSelecionados.join(', ')},
+                {l: 'Como soube', v: (form.midia === 'Outras' || form.midia === 'Parceiros') ? document.getElementById('midia_outro').value : form.midia}
+            ];
+            document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
         }
 
         async function finish() {
             const btn = document.getElementById('confirm-btn');
-            btn.innerText = "Salvando..."; btn.disabled = true;
+            btn.innerText = "Enviando..."; btn.disabled = true;
 
             const payload = {
                 "NOME COMPLETO": document.getElementById('nome').value,
@@ -291,15 +368,8 @@
                 document.getElementById('s9').style.display = 'none';
                 document.getElementById('sFinal').style.display = 'flex';
                 document.getElementById('bar').style.width = '100%';
-            } catch (e) { alert("Erro ao enviar."); btn.disabled = false; btn.innerText = "Finalizar"; }
+            } catch (e) { alert("Erro ao enviar."); btn.disabled = false; btn.innerText = "Confirmar"; }
         }
-
-        // Reveal Animation
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
-            });
-        });
     </script>
 </body>
 </html>
