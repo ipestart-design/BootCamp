@@ -54,7 +54,7 @@
 
         h1 { font-size: clamp(32px, 9vw, 68px); font-weight: 800; line-height: 1.0; margin-bottom: 25px; text-align: center; }
         h1 span { color: var(--amarelo); text-shadow: 0 0 25px rgba(242, 201, 76, 0.3); }
-        h2 { font-size: clamp(24px, 6vw, 32px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
+        h2 { font-size: clamp(20px, 5vw, 28px); font-weight: 800; color: var(--amarelo); margin-bottom: 25px; text-transform: uppercase; }
         p { font-size: 18px; line-height: 1.6; opacity: 0.9; }
 
         .icon-line { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
@@ -83,17 +83,20 @@
 
         #form-area { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 85vh; justify-content: center; }
         .progress-wrap { width: 100%; max-width: 350px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; margin-bottom: 40px; overflow: hidden; }
-        .progress-bar { height: 100%; width: 12.5%; background: var(--amarelo); transition: width 0.8s ease; box-shadow: 0 0 20px var(--amarelo); }
+        .progress-bar { height: 100%; width: 11%; background: var(--amarelo); transition: width 0.8s ease; box-shadow: 0 0 20px var(--amarelo); }
         
-        .step-card { background: rgba(0, 0, 0, 0.9); padding: 45px; border-radius: 40px; width: 100%; max-width: 450px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
+        .step-card { background: rgba(0, 0, 0, 0.9); padding: 45px; border-radius: 40px; width: 100%; max-width: 480px; display: none; flex-direction: column; border: 1px solid var(--glass-border); box-sizing: border-box; }
         .step-card.active { display: flex; animation: slideUp 0.6s ease-out; }
 
         input, textarea { width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); font-size: 18px; font-family: 'Manrope'; background: transparent; color: var(--branco); outline: none; margin-bottom: 30px; }
         input:focus { border-bottom-color: var(--amarelo); }
 
         .nav-buttons { display: flex; gap: 12px; width: 100%; }
-        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 18px; border-radius: 18px; font-weight: 800; flex: 2; cursor: pointer; }
+        .btn-next { background: var(--amarelo); color: var(--preto); border: none; padding: 18px; border-radius: 18px; font-weight: 800; flex: 2; cursor: pointer; text-transform: uppercase; font-size: 13px; }
         .btn-back { background: transparent; color: var(--branco); border: 1px solid rgba(255,255,255,0.3); border-radius: 18px; flex: 1; cursor: pointer; }
+
+        .option-btn { border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center; font-size: 14px; transition: 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.05); }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -112,54 +115,7 @@
                 <p>No Bootcamp de Ideação, você valida suas ideias com problemas reais e constrói soluções fundamentadas em evidências de mercado.</p>
                 <button class="cta-button" onclick="goToForm()">Quero evoluir minha ideia</button>
             </header>
-
-            <section class="glass-card reveal">
-                <h2>O Problema em Primeiro Lugar</h2>
-                <div class="icon-line"><div class="dot"></div><p><strong>Mapeamento:</strong> Dores que as pessoas pagariam para resolver.</p></div>
-                <div class="icon-line"><div class="dot"></div><p><strong>Evidências:</strong> Substitua o "eu acho" por métricas e validações.</p></div>
-                <div class="icon-line"><div class="dot"></div><p><strong>Agilidade:</strong> Aprenda a pivotar rápido com base em dados.</p></div>
-            </section>
-
-            <section class="glass-card reveal">
-                <h2>Suas Entregas</h2>
-                <p>O que você terá em mãos ao final da jornada:</p>
-                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Mapa do Problema & Problem Statement</p></div>
-                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>VPC & Lean Canvas Estratégico</p></div>
-                <div class="icon-line"><svg width="20" height="20" fill="#F2C94C" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><p>Protótipo V2 e Relatório de Testes</p></div>
-                <center style="margin-top:30px"><button class="cta-button" onclick="goToForm()">Iniciar minha jornada</button></center>
-            </section>
-
-            <h2 style="text-align:center; margin-top: 50px;">Corpo de Mentores</h2>
-
-            <section class="glass-card reveal">
-                <div class="mentor-grid">
-                    <img src="foto-decio.jpg" alt="Décio" class="mentor-img" onerror="this.src='https://via.placeholder.com/180?text=Décio'">
-                    <div style="flex:1; min-width: 280px;">
-                        <h3>Décio Antônio Mendonça</h3>
-                        <div class="tag-container">
-                            <span class="tag-item">Gestor Ipê Tech</span>
-                            <span class="tag-item">Expert No-Code</span>
-                            <span class="tag-item">Estrategista Digital</span>
-                        </div>
-                        <p style="font-size: 16px;">Líder de inovação no <strong>Ipê Tech</strong>. Décio guiará você na realização de 10 entrevistas e 10 testes práticos para traduzir incertezas em decisões seguras.</p>
-                    </div>
-                </div>
-            </section>
-
-            <div class="card-locked reveal">
-                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
-                <span>REVELAR EM BREVE...</span>
             </div>
-
-            <div class="card-locked reveal" style="margin-top: 20px;">
-                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
-                <span>CONVIDADO ESPECIAL</span>
-            </div>
-
-            <section class="reveal" style="text-align: center; padding: 60px 0 100px 0;">
-                <button class="cta-button" onclick="goToForm()">INSCREVA-SE E SAIA DO ZERO</button>
-            </section>
-        </div>
 
         <div id="form-area">
             <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
@@ -192,68 +148,71 @@
             <div class="step-card" id="s5">
                 <h2>Qual seu perfil atual?</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
-                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
-                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
-                    <div class="option-btn p-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'ALUNO', 'perfil')">Aluno</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'PROFESSOR', 'perfil')">Professor</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'EMPREENDEDOR', 'perfil')">Empreendedor</div>
+                    <div class="option-btn p-opt" onclick="selectOpt('p-opt', this, 'Outros', 'perfil')">Outros</div>
                 </div>
-                <input type="text" id="perfil_outro" placeholder="Especifique" style="display:none;">
+                <input type="text" id="perfil_outro" placeholder="Especifique seu perfil" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(5)">Voltar</button><button class="btn-next" onclick="next(5)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s6">
-                <h2>Suas expectativas:</h2>
-                <textarea id="expectativas" placeholder="O que deseja alcançar?"></textarea>
+                <h2>Por onde você ficou sabendo do evento?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <div class="option-btn m-opt" onclick="selectOpt('m-opt', this, 'Instagram Ipetech', 'midia')">Instagram Ipetech</div>
+                    <div class="option-btn m-opt" onclick="selectOpt('m-opt', this, 'Pacto de Lavras', 'midia')">Pacto de Lavras</div>
+                    <div class="option-btn m-opt" onclick="selectOpt('m-opt', this, 'Prefeitura', 'midia')">Prefeitura</div>
+                    <div class="option-btn m-opt" onclick="selectOpt('m-opt', this, 'Parceiros', 'midia')">Parceiros</div>
+                    <div class="option-btn m-opt" style="grid-column: span 2;" onclick="selectOpt('m-opt', this, 'Outras', 'midia')">Outras</div>
+                </div>
+                <input type="text" id="midia_outro" placeholder="Qual parceiro ou mídia?" style="display:none;">
                 <div class="nav-buttons"><button class="btn-back" onclick="back(6)">Voltar</button><button class="btn-next" onclick="next(6)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s7">
-                <h2>Acessibilidade?</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-                    <div class="option-btn a-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
-                    <div class="option-btn a-opt" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; cursor: pointer; text-align: center;" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
-                </div>
-                <input type="text" id="acesso_detalhe" placeholder="Como ajudar?" style="display:none;">
-                <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Revisar</button></div>
+                <h2>Suas expectativas:</h2>
+                <textarea id="expectativas" placeholder="O que deseja alcançar?"></textarea>
+                <div class="nav-buttons"><button class="btn-back" onclick="back(7)">Voltar</button><button class="btn-next" onclick="next(7)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s8">
+                <h2>Acessibilidade?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Não', 'acesso')">Não</div>
+                    <div class="option-btn a-opt" onclick="selectOpt('a-opt', this, 'Sim', 'acesso')">Sim</div>
+                </div>
+                <input type="text" id="acesso_detalhe" placeholder="Como podemos ajudar?" style="display:none;">
+                <div class="nav-buttons"><button class="btn-back" onclick="back(8)">Voltar</button><button class="btn-next" onclick="next(8)">Revisar</button></div>
+            </div>
+
+            <div class="step-card" id="s9">
                 <h2>Confirme seus dados:</h2>
-                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; font-size: 15px;"></div>
+                <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; font-size: 14px;"></div>
                 <div class="nav-buttons">
-                    <button class="btn-back" onclick="back(8)">Corrigir</button>
-                    <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar</button>
+                    <button class="btn-back" onclick="back(9)">Corrigir</button>
+                    <button class="btn-next" id="confirm-btn" onclick="finish()">Confirmar e Enviar</button>
                 </div>
             </div>
 
             <div class="step-card" id="sFinal" style="text-align: center;">
                 <h2 style="color:var(--amarelo)">Inscrição Realizada!</h2>
-                <p>Verifique seu e-mail.</p>
+                <p>Enviamos uma confirmação para seu e-mail. Nos vemos em breve!</p>
                 <button class="cta-button" onclick="location.reload()" style="margin-top:20px">Sair</button>
             </div>
         </div>
     </div>
 
     <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        window.onload = reveal;
-
+        // Lógica de Scroll e Interface permanecem as mesmas
         function goToForm() {
             document.getElementById('lp-content').style.display = 'none';
             document.getElementById('form-area').style.display = 'flex';
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        let form = { perfil: "", acesso: "" };
-        const totalSteps = 8;
+        let form = { perfil: "", midia: "", acesso: "" };
+        const totalSteps = 9;
 
         function selectOpt(group, btn, val, field) {
             document.querySelectorAll('.'+group).forEach(b => {
@@ -261,15 +220,18 @@
             });
             btn.style.background = 'var(--amarelo)'; btn.style.color = 'black';
             form[field] = val;
+            
+            // Campos extras de texto
             if(field === 'perfil') document.getElementById('perfil_outro').style.display = (val === 'Outros') ? 'block' : 'none';
+            if(field === 'midia') document.getElementById('midia_outro').style.display = (val === 'Outras' || val === 'Parceiros') ? 'block' : 'none';
             if(field === 'acesso') document.getElementById('acesso_detalhe').style.display = (val === 'Sim') ? 'block' : 'none';
         }
 
+        // Máscaras (Tel e CPF)
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
-
         document.getElementById('cpf').addEventListener('input', e => {
             let v = e.target.value.replace(/\D/g, '');
             v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
@@ -281,25 +243,29 @@
         function next(step) {
             if(step <= 4 && document.getElementById(['nome','email','tel','cpf'][step-1]).value.length < 3) return;
             if(step === 5 && !form.perfil) return;
-            if(step === 6 && document.getElementById('expectativas').value.length < 2) return;
-            if(step === 7 && !form.acesso) return;
-            if(step === 7) renderReview();
+            if(step === 6 && !form.midia) return;
+            if(step === 7 && document.getElementById('expectativas').value.length < 2) return;
+            if(step === 8 && !form.acesso) return;
+            
+            if(step === 8) renderReview();
+            
             document.getElementById('s' + step).classList.remove('active');
             setTimeout(() => {
                 document.getElementById('s' + step).style.display = 'none';
                 const n = document.getElementById('s' + (step + 1));
-                if(n) { n.style.display = 'flex'; n.classList.add('active'); document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%'; }
+                if(n) { 
+                    n.style.display = 'flex'; 
+                    n.classList.add('active'); 
+                    document.getElementById('bar').style.width = ((step + 1) / totalSteps) * 100 + '%'; 
+                }
             }, 50);
         }
 
         function back(step) {
-            document.getElementById('s' + step).classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('s' + step).style.display = 'none';
-                const p = document.getElementById('s' + (step - 1));
-                p.style.display = 'flex'; p.classList.add('active');
-                document.getElementById('bar').style.width = ((step - 1) / totalSteps) * 100 + '%';
-            }, 50);
+            document.getElementById('s' + step).style.display = 'none';
+            const p = document.getElementById('s' + (step - 1));
+            p.style.display = 'flex'; p.classList.add('active');
+            document.getElementById('bar').style.width = ((step - 1) / totalSteps) * 100 + '%';
         }
 
         function renderReview() {
@@ -309,6 +275,7 @@
                 {l: 'WhatsApp', v: document.getElementById('tel').value},
                 {l: 'CPF', v: document.getElementById('cpf').value},
                 {l: 'Perfil', v: form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil},
+                {l: 'Como soube', v: (form.midia === 'Outras' || form.midia === 'Parceiros') ? document.getElementById('midia_outro').value : form.midia},
                 {l: 'Acessibilidade', v: form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'}
             ];
             document.getElementById('review-content').innerHTML = data.map(i => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #444"><strong>${i.l}:</strong> <span>${i.v}</span></div>`).join('');
@@ -317,30 +284,31 @@
         async function finish() {
             const btn = document.getElementById('confirm-btn');
             btn.innerText = "Enviando..."; btn.disabled = true;
+            
             const payload = {
                 "NOME COMPLETO": document.getElementById('nome').value,
                 "E-MAIL": document.getElementById('email').value,
-                "TELEFONE (WHATSAPP)": document.getElementById('tel').value,
+                "TELEFONE": document.getElementById('tel').value,
                 "CPF": document.getElementById('cpf').value,
-                "ALUNO": (form.perfil === 'ALUNO' ? 'X' : ''),
-                "PROFESSOR": (form.perfil === 'PROFESSOR' ? 'X' : ''),
-                "EMPREENDEDOR": (form.perfil === 'EMPREENDEDOR' ? 'X' : ''),
-                "PERFIL OUTROS": form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : "",
+                "PERFIL": form.perfil === 'Outros' ? document.getElementById('perfil_outro').value : form.perfil,
+                "COMO_SOUBE": (form.midia === 'Outras' || form.midia === 'Parceiros') ? document.getElementById('midia_outro').value : form.midia,
                 "EXPECTATIVAS": document.getElementById('expectativas').value,
                 "ACESSIBILIDADE": form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'
             };
+
             try {
                 await fetch('https://sheetdb.io/api/v1/ip3jj7bkpknn3', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ data: [payload] })
                 });
+                // Envio de e-mail via EmailJS
                 await emailjs.send("service_clqnr6o", "template_13fmvbj", {
-                    nome: payload["NOME COMPLETO"], email: payload["E-MAIL"],
-                    perfil: payload["PERFIL OUTROS"] || form.perfil
+                    nome: payload["NOME COMPLETO"], 
+                    email: payload["E-MAIL"]
                 });
-                document.getElementById('s8').style.display = 'none';
+                
+                document.getElementById('s9').style.display = 'none';
                 document.getElementById('sFinal').style.display = 'flex';
-                document.getElementById('sFinal').classList.add('active');
                 document.getElementById('bar').style.width = '100%';
             } catch (e) { alert("Erro ao enviar."); btn.disabled = false; btn.innerText = "Confirmar"; }
         }
