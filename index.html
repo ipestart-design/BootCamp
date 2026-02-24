@@ -16,19 +16,18 @@
             --roxo: #7B5DFF; 
             --preto: #050505; 
             --branco: #FFFFFF; 
-            --glass: rgba(0, 0, 0, 0.7);
-            --border: rgba(255, 255, 255, 0.15);
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
         }
         
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.png'); 
+            background: var(--preto); color: var(--branco); overflow-x: hidden;
+            /* AJUSTE: Fundo mais claro (opacidade 0.35 em vez de 0.6) */
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('background.png');
             background-size: cover; 
             background-position: center; 
             background-attachment: fixed;
-            background-color: var(--preto); 
-            color: var(--branco); 
-            overflow-x: hidden;
         }
 
         .container { width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
@@ -36,11 +35,13 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* HEADER */
         header { text-align: center; padding: 80px 0 40px; }
         h1 { font-size: clamp(38px, 9vw, 68px); font-weight: 800; line-height: 1; margin: 0; letter-spacing: -2px; }
         h1 span { color: var(--amarelo); }
-        .subtitle { font-size: 18px; opacity: 0.85; max-width: 600px; margin: 25px auto; line-height: 1.6; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .subtitle { font-size: 18px; opacity: 0.8; max-width: 600px; margin: 25px auto; line-height: 1.6; }
 
+        /* GRIDS E CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
         .card { 
             background: var(--glass); 
@@ -51,17 +52,17 @@
             border-radius: 24px; 
             transition: 0.3s;
         }
-        .card:hover { border-color: var(--amarelo); background: rgba(0,0,0,0.8); }
+        .card:hover { border-color: var(--amarelo); background: rgba(0,0,0,0.3); }
         .card h3 { color: var(--amarelo); text-transform: uppercase; font-size: 13px; letter-spacing: 2px; margin-top: 0; }
         .card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; opacity: 0.9; }
 
-        /* Estilo para listas dentro do card único */
+        /* Listas com ícones SVG */
         .card-list-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
         .card-list-item svg { flex-shrink: 0; margin-top: 2px; }
 
+        /* MENTORES */
         .mentor-row { display: flex; align-items: center; gap: 20px; background: var(--glass); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 15px; transition: 0.3s; }
-        .mentor-row:hover { border-color: var(--amarelo); }
-        /* Removido o filtro grayscale da imagem */
+        .mentor-row:hover { border-color: var(--amarelo); background: rgba(0,0,0,0.3); }
         .mentor-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border); transition: 0.3s; }
         .mentor-row:hover .mentor-img { border-color: var(--amarelo); }
         .mentor-info h4 { margin: 0; color: var(--amarelo); font-size: 18px; }
@@ -69,12 +70,13 @@
 
         .locked { border: 1px dashed rgba(255,255,255,0.3); opacity: 0.6; justify-content: center; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
 
+        /* BOTÕES CTA */
         .cta { 
             background: var(--amarelo); color: var(--preto); padding: 22px 45px; border-radius: 100px; 
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer; transition: 0.4s;
-            display: inline-block; width: 100%; max-width: 450px; text-align: center; font-size: 15px; margin-top: 20px;
+            display: inline-block; width: 100%; max-width: 450px; text-align: center; font-size: 15px;
         }
-        .cta:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(242, 201, 76, 0.4); }
+        .cta:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(242, 201, 76, 0.3); }
 
         .badge-locked { 
             background: rgba(0,0,0,0.6); border: 1px solid var(--border); padding: 8px 15px; 
@@ -83,7 +85,12 @@
 
         /* FORMULÁRIO */
         #form-area { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh; }
-        .step-card { background: rgba(0,0,0,0.95); padding: 40px; border-radius: 32px; border: 1px solid var(--border); width: 100%; max-width: 480px; display: none; box-sizing: border-box; backdrop-filter: blur(20px); }
+        
+        /* AJUSTE: Barra de Progresso Restaurada */
+        .progress-wrap { width: 100%; max-width: 350px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 30px; }
+        .progress-bar { height: 100%; width: 11.1%; background: var(--amarelo); transition: 0.6s; border-radius: 10px; box-shadow: 0 0 15px var(--amarelo); }
+        
+        .step-card { background: rgba(0,0,0,0.85); padding: 40px; border-radius: 32px; border: 1px solid var(--border); width: 100%; max-width: 480px; display: none; box-sizing: border-box; backdrop-filter: blur(20px); }
         .step-card.active { display: flex; flex-direction: column; animation: slideUp 0.4s ease; }
         
         input, textarea { width: 100%; background: transparent; border: none; border-bottom: 2px solid #333; color: #fff; padding: 15px 0; font-size: 18px; outline: none; margin: 20px 0; font-family: 'Manrope'; }
@@ -137,7 +144,7 @@
                         <p><strong>Validação:</strong> Protótipo V2 e Relatório de Testes baseado em feedbacks reais de campo.</p>
                     </div>
                 </div>
-                <center><button class="cta" onclick="goToForm()">Iniciar Jornada Agora</button></center>
+                <center><button class="cta" onclick="goToForm()" style="margin-top: 30px;">Iniciar Jornada Agora</button></center>
             </section>
 
             <section class="reveal" style="margin-top: 60px;">
@@ -161,6 +168,8 @@
         </div>
 
         <div id="form-area">
+            <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+
             <div class="step-card active" id="s1">
                 <h3>Passo 01</h3>
                 <h2>Qual seu nome completo?</h2>
@@ -253,6 +262,7 @@
     <script>
         let form = { midia: "", acesso: "" };
         let perfisSelecionados = [];
+        const totalSteps = 9;
 
         function reveal() {
             document.querySelectorAll(".reveal").forEach(el => {
@@ -302,11 +312,15 @@
             document.getElementById('s'+s).style.display = 'none';
             document.getElementById('s'+(s+1)).style.display = 'flex';
             document.getElementById('s'+(s+1)).classList.add('active');
+            // AJUSTE: Lógica da barra de progresso
+            document.getElementById('bar').style.width = ((s+1)/totalSteps)*100 + '%';
         }
 
         function back(s) {
             document.getElementById('s'+s).style.display = 'none';
             document.getElementById('s'+(s-1)).style.display = 'flex';
+            // AJUSTE: Lógica da barra de progresso no Voltar
+            document.getElementById('bar').style.width = ((s-1)/totalSteps)*100 + '%';
         }
 
         function renderReview() {
@@ -357,6 +371,7 @@
                 });
                 document.getElementById('s9').style.display = 'none';
                 document.getElementById('sFinal').style.display = 'flex';
+                document.getElementById('bar').style.width = '100%';
             } catch (e) { alert("Erro de rede."); btn.disabled = false; btn.innerText = "Finalizar"; }
         }
     </script>
