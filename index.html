@@ -22,7 +22,6 @@
         
         body { 
             margin: 0; padding: 0; font-family: 'Manrope', sans-serif; 
-            /* FUNDO RESTAURADO AQUI */
             background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.png'); 
             background-size: cover; 
             background-position: center; 
@@ -56,9 +55,15 @@
         .card h3 { color: var(--amarelo); text-transform: uppercase; font-size: 13px; letter-spacing: 2px; margin-top: 0; }
         .card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; opacity: 0.9; }
 
-        .mentor-row { display: flex; align-items: center; gap: 20px; background: var(--glass); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 15px; }
-        .mentor-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; filter: grayscale(100%); transition: 0.3s; border: 1px solid var(--border); }
-        .mentor-row:hover .mentor-img { filter: grayscale(0%); border-color: var(--amarelo); }
+        /* Estilo para listas dentro do card único */
+        .card-list-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
+        .card-list-item svg { flex-shrink: 0; margin-top: 2px; }
+
+        .mentor-row { display: flex; align-items: center; gap: 20px; background: var(--glass); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 15px; transition: 0.3s; }
+        .mentor-row:hover { border-color: var(--amarelo); }
+        /* Removido o filtro grayscale da imagem */
+        .mentor-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border); transition: 0.3s; }
+        .mentor-row:hover .mentor-img { border-color: var(--amarelo); }
         .mentor-info h4 { margin: 0; color: var(--amarelo); font-size: 18px; }
         .mentor-info p { margin: 5px 0 0; font-size: 13px; opacity: 0.8; }
 
@@ -67,7 +72,7 @@
         .cta { 
             background: var(--amarelo); color: var(--preto); padding: 22px 45px; border-radius: 100px; 
             font-weight: 800; text-transform: uppercase; border: none; cursor: pointer; transition: 0.4s;
-            display: inline-block; width: 100%; max-width: 450px; text-align: center; font-size: 15px;
+            display: inline-block; width: 100%; max-width: 450px; text-align: center; font-size: 15px; margin-top: 20px;
         }
         .cta:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(242, 201, 76, 0.4); }
 
@@ -119,14 +124,17 @@
 
             <section class="reveal">
                 <h2 style="text-align:center; font-size: 24px; text-transform: uppercase;">Ativos da Jornada</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3 style="color: #fff;">Estratégia</h3>
-                        <p>Mapa do Problema, Persona, Jobs to be Done e rascunho de Lean Canvas.</p>
+                <div class="card" style="max-width: 600px; margin: 0 auto;">
+                    <h3 style="color: #fff; margin-bottom: 20px;">O que você vai construir:</h3>
+                    
+                    <div class="card-list-item">
+                        <svg width="20" height="20" fill="var(--amarelo)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <p><strong>Estratégia:</strong> Mapa do Problema, Persona, Jobs to be Done e rascunho de Lean Canvas.</p>
                     </div>
-                    <div class="card">
-                        <h3 style="color: #fff;">Validação</h3>
-                        <p>Protótipo V2 e Relatório de Testes baseado em feedbacks reais de campo.</p>
+                    
+                    <div class="card-list-item">
+                        <svg width="20" height="20" fill="var(--amarelo)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <p><strong>Validação:</strong> Protótipo V2 e Relatório de Testes baseado em feedbacks reais de campo.</p>
                     </div>
                 </div>
                 <center><button class="cta" onclick="goToForm()">Iniciar Jornada Agora</button></center>
