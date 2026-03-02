@@ -96,7 +96,7 @@
         #form-area { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh; }
         
         .progress-wrap { width: 100%; max-width: 350px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 30px; }
-        .progress-bar { height: 100%; width: 11.1%; background: var(--amarelo); transition: 0.6s; border-radius: 10px; box-shadow: 0 0 15px var(--amarelo); }
+        .progress-bar { height: 100%; width: 10%; background: var(--amarelo); transition: 0.6s; border-radius: 10px; box-shadow: 0 0 15px var(--amarelo); }
         
         .step-card { background: rgba(0,0,0,0.85); padding: 40px; border-radius: 32px; border: 1px solid var(--border); width: 100%; max-width: 480px; display: none; box-sizing: border-box; backdrop-filter: blur(20px); }
         .step-card.active { display: flex; flex-direction: column; animation: slideUp 0.4s ease; }
@@ -107,6 +107,7 @@
         .opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .option { border: 1px solid #333; padding: 15px; border-radius: 12px; cursor: pointer; text-align: center; font-size: 14px; transition: 0.2s; background: rgba(255,255,255,0.03); }
         .option.selected { background: var(--amarelo); color: #000; font-weight: 800; border-color: var(--amarelo); }
+        .option.full { grid-column: span 2; }
 
         .nav { display: flex; gap: 10px; margin-top: 10px; }
         .btn-n { background: var(--amarelo); color: #000; border: none; padding: 18px; border-radius: 15px; font-weight: 800; flex: 2; cursor: pointer; text-transform: uppercase; }
@@ -243,44 +244,56 @@
 
             <div class="step-card" id="s7">
                 <h3 style="margin:0; font-size:12px; opacity:0.6; text-transform:uppercase;">Passo 07</h3>
-                <h2>Suas expectativas:</h2>
-                <textarea id="expectativas" placeholder="O que deseja alcançar?" style="height: 80px;"></textarea>
+                <h2>O Bootcamp será dia 23 de Março. Qual seu turno de preferência?</h2>
+                <div class="opt-grid">
+                    <div class="option h-opt" onclick="selectSingle('h-opt', this, 'Manhã', 'turno')">Manhã</div>
+                    <div class="option h-opt" onclick="selectSingle('h-opt', this, 'Tarde', 'turno')">Tarde</div>
+                    <div class="option h-opt full" onclick="selectSingle('h-opt', this, 'Noite', 'turno')">Noite</div>
+                </div>
+                <input type="text" id="horario_sugerido" placeholder="Sugira um horário (Ex: 14h às 18h)" style="margin-top: 10px;">
                 <div class="nav"><button class="btn-b" onclick="back(7)">Voltar</button><button class="btn-n" onclick="next(7)">Próximo</button></div>
             </div>
 
             <div class="step-card" id="s8">
                 <h3 style="margin:0; font-size:12px; opacity:0.6; text-transform:uppercase;">Passo 08</h3>
+                <h2>Suas expectativas:</h2>
+                <textarea id="expectativas" placeholder="O que deseja alcançar?" style="height: 80px;"></textarea>
+                <div class="nav"><button class="btn-b" onclick="back(8)">Voltar</button><button class="btn-n" onclick="next(8)">Próximo</button></div>
+            </div>
+
+            <div class="step-card" id="s9">
+                <h3 style="margin:0; font-size:12px; opacity:0.6; text-transform:uppercase;">Passo 09</h3>
                 <h2>Acessibilidade?</h2>
                 <div class="opt-grid">
                     <div class="option a-opt" onclick="selectSingle('a-opt', this, 'Não', 'acesso')">Não</div>
                     <div class="option a-opt" onclick="selectSingle('a-opt', this, 'Sim', 'acesso')">Sim</div>
                 </div>
                 <input type="text" id="acesso_detalhe" placeholder="Como ajudar?" style="display:none;">
-                <div class="nav"><button class="btn-b" onclick="back(8)">Voltar</button><button class="btn-n" onclick="next(8)">Revisar</button></div>
+                <div class="nav"><button class="btn-b" onclick="back(9)">Voltar</button><button class="btn-n" onclick="next(9)">Revisar</button></div>
             </div>
 
-            <div class="step-card" id="s9">
+            <div class="step-card" id="s10">
                 <h3 style="margin:0; font-size:12px; opacity:0.6; text-transform:uppercase;">Revisão</h3>
                 <h2>Confirme seus dados:</h2>
                 <div id="review-content" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 20px; font-size: 13px; line-height: 1.6;"></div>
                 <div class="nav">
-                    <button class="btn-b" onclick="back(9)">Corrigir</button>
+                    <button class="btn-b" onclick="back(10)">Corrigir</button>
                     <button class="btn-n" id="confirm-btn" onclick="finish()">Finalizar</button>
                 </div>
             </div>
 
-            <div class="step-card" id="sFinal" style="text-align: center; padding: 60px 40px; align-items: center;">
+            <div class="step-card" id="sFinal" style="text-align: center; padding: 60px 40px; align-items: center; flex-direction: column;">
                 <h2 style="font-size: 32px; margin-bottom: 10px;">INSCRIÇÃO REALIZADA!</h2>
                 <p style="font-size: 16px; margin-bottom: 40px; opacity: 0.9;">Verifique seu e-mail para os próximos passos.</p>
-                <button class="btn-n" onclick="location.reload()" style="max-width: 300px; width: 100%;">VOLTAR</button>
+                <button class="btn-n" onclick="location.reload()" style="max-width: 300px; width: 100%; flex: none;">VOLTAR</button>
             </div>
         </div>
     </div>
 
     <script>
-        let form = { midia: "", acesso: "" };
+        let form = { midia: "", acesso: "", turno: "" };
         let perfisSelecionados = [];
-        const totalSteps = 9;
+        const totalSteps = 10;
 
         function reveal() {
             document.querySelectorAll(".reveal").forEach(el => {
@@ -326,7 +339,7 @@
         function checkEnter(e, s) { if(e.key === "Enter") next(s); }
 
         function next(s) {
-            if(s === 8) renderReview();
+            if(s === 9) renderReview();
             
             document.getElementById('s'+s).style.display = 'none';
             document.getElementById('s'+s).classList.remove('active');
@@ -353,12 +366,18 @@
             let pFinal = [...perfisSelecionados];
             if(pFinal.includes('Outros')) pFinal = pFinal.map(x => x === 'Outros' ? `Outro (${document.getElementById('perfil_outro').value})` : x);
             
+            let horarioInfo = (form.turno ? form.turno : 'Não informado');
+            if (document.getElementById('horario_sugerido').value) {
+                horarioInfo += ' - ' + document.getElementById('horario_sugerido').value;
+            }
+
             const dados = [
                 {l: 'Nome', v: document.getElementById('nome').value},
                 {l: 'E-mail', v: document.getElementById('email').value},
                 {l: 'WhatsApp', v: document.getElementById('tel').value},
                 {l: 'CPF', v: document.getElementById('cpf').value},
                 {l: 'Perfis', v: pFinal.join(', ')},
+                {l: 'Disponibilidade (23/03)', v: horarioInfo},
                 {l: 'Expectativas', v: document.getElementById('expectativas').value}
             ];
 
@@ -383,6 +402,8 @@
                 "EMPREENDEDOR": perfisSelecionados.includes('EMPREENDEDOR') ? 'X' : '',
                 "PERFIL OUTROS": perfisSelecionados.includes('Outros') ? document.getElementById('perfil_outro').value : '',
                 "COMO_SOUBE": form.midia,
+                "TURNO": form.turno,
+                "HORARIO_SUGERIDO": document.getElementById('horario_sugerido').value,
                 "EXPECTATIVAS": document.getElementById('expectativas').value,
                 "ACESSIBILIDADE": form.acesso === 'Sim' ? document.getElementById('acesso_detalhe').value : 'Não'
             };
@@ -393,7 +414,7 @@
                     body: JSON.stringify({ data: [payload] })
                 });
                 
-                // Disparo de Email
+                // Disparo de Email (Ajuste o template ID de acordo com o desejado para este evento)
                 if(payload["E-MAIL"]) {
                     await emailjs.send("service_clqnr6o", "template_13fmvbj", {
                         nome: payload["NOME COMPLETO"], email: payload["E-MAIL"]
@@ -401,8 +422,8 @@
                 }
                 
                 // Transição suave para a tela final
-                document.getElementById('s9').style.display = 'none';
-                document.getElementById('s9').classList.remove('active');
+                document.getElementById('s10').style.display = 'none';
+                document.getElementById('s10').classList.remove('active');
                 
                 document.getElementById('sFinal').style.display = 'flex';
                 document.getElementById('sFinal').classList.add('active');
