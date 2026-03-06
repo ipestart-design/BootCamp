@@ -185,7 +185,16 @@
                     </div>
                 </div>
 
-                <div class="mentor-row locked">Convidado Especial</div>
+                <div class="mentor-row">
+                    <img src="https://ipetech.ufla.br/wp-content/uploads/2025/01/3.png" class="mentor-img" onerror="this.src='https://via.placeholder.com/70'">
+                    <div class="mentor-info">
+                        <h4>Alex Bager</h4>
+                        <p>Pesquisador e Empreendedor. PhD em Ecologia e fundador da EnvironBIT, uma startup socioambiental focada em transformar ciência em soluções para salvar vidas nas rodovias.</p>
+                    </div>
+                </div>
+
+                <div class="mentor-row locked">Convidado Especial (Revelado em Breve)</div>
+
             </section>
 
             <section class="reveal" style="text-align: center; padding: 80px 0;">
@@ -423,14 +432,12 @@
                     body: JSON.stringify({ data: [payload] })
                 });
                 
-                // Disparo de Email (Ajuste o template ID de acordo com o desejado para este evento)
                 if(payload["E-MAIL"]) {
                     await emailjs.send("service_clqnr6o", "template_13fmvbj", {
                         nome: payload["NOME COMPLETO"], email: payload["E-MAIL"]
                     });
                 }
                 
-                // Transição suave para a tela final
                 document.getElementById('s10').style.display = 'none';
                 document.getElementById('s10').classList.remove('active');
                 
